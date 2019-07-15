@@ -21,7 +21,7 @@
 
 
  #define MAGDEC -600  // Your local Magnetic Declination in radian. Get it from here: http://magnetic-declination.com/  then convert it in milliradian: http://www.wolframalpha.com/input/?i=%280%C2%B0+5%27%29+in+radians
-                     // only needed if using internal compass.
+                      // only needed if using internal compass.
 
 //Minimum distance in meters where it will stop moving servos.
  #define DONTTRACKUNDER  5
@@ -39,12 +39,12 @@
  #define BANK3  "Bank 3"
  #define BANK4  "Bank 4"
 
- //GS Battery alarm
+//GS Battery alarm
  #define MIN_VOLTAGE1 10.5f // First battery alarm level. Will emit 2 short tones every 10 sec.
  #define MIN_VOLTAGE2 10.0f // Second battery alarm level. Will emit 1 short + 1 long tone every 5 sec
  #define VOLTAGE_RATIO 600   // Default multiplier for battery voltage reading * 100. This can eb adjustd later from the menu.
 
- // Minimum voltage for lipo alert
+// Minimum voltage for lipo alert
 //########### GROUND OSD TELEMETRY OUTPUT #########################################################################
 // Activate osd output (comment if not needed)
  #define OSD_OUTPUT
@@ -70,7 +70,7 @@
  #define PAN_MAXPWM 1500     //max pan servo pwm value
  #define PAN_MAXANGLE 90     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
  #define PAN_MINPWM 1500     //min pan servo pwm valuemin pan servo pwm value
- #define PAN_MINANGLE 90	    //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
+ #define PAN_MINANGLE 90      //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
 
  #define TILT_MAXPWM 1500    //max tilt pwm value
  #define TILT_MAXANGLE 90    //max tilt angle considering 0° is facing toward.
@@ -84,7 +84,7 @@
 //pinout for TEENSY++ 2
 #ifdef TEENSYPLUS2
   #define PAN_SERVOPIN     26    //PWM Pin for pan servo
-  #define TILT_SERVOPIN    25 	 //PWM Pin for tilt servo
+  #define TILT_SERVOPIN    25    //PWM Pin for tilt servo
   #define LEFT_BUTTON_PIN  10    //Any Digital pin
   #define RIGHT_BUTTON_PIN  9    //Any Digital pin
   #define ENTER_BUTTON_PIN  8    //Any Digital pin
@@ -96,7 +96,7 @@
 
 //pinout for Arduino Mega 1280/2560
 #ifdef MEGA
-  #define PAN_SERVOPIN     11	//PWM Pin for pan servo ---> (PB5) - APM OUT PWM 2
+  #define PAN_SERVOPIN     11   //PWM Pin for pan servo ---> (PB5) - APM OUT PWM 2
   #define TILT_SERVOPIN    12   //PWM Pin for tilt servo ---> (PB6) - APM OUT PWM 1
   #define LEFT_BUTTON_PIN  32   //Any Digital pin ---> (PC5)
   #define RIGHT_BUTTON_PIN 34   //Any Digital pin ---> (PC3)

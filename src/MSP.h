@@ -58,5 +58,3 @@ void msp_check();
 #define REQ_MSP_ANALOG    (1 <<  8)
 // End of imported defines from Multiwii Serial Protocol MultiWii_shared svn r1333
 // ---------------------------------------------------------------------------------------
-
-

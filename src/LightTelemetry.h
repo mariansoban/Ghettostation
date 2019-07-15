@@ -10,5 +10,5 @@ void ltm_check();
 #define LIGHTTELEMETRY_AFRAMELENGTH 10
 #define LIGHTTELEMETRY_SFRAMELENGTH 11
 #define LIGHTTELEMETRY_OFRAMELENGTH 18
-	
+
 void telemetry_off(void);
