@@ -110,7 +110,7 @@ long baudrates[8] = { 1200, 2400, 4800, 9600, 19200, 38400, BAUDRATE56K, 115200 
 
 FLASH_STRING(string_load1, "  [GHETTOSTATION]   ");
 FLASH_STRING(string_load2, "                    ");
-FLASH_STRING(string_load3, "Rev 1.1.0-dev   ");
+FLASH_STRING(string_load3, "Rev 1.1.0-sobi-dev   ");
 FLASH_STRING(string_shome1, "  Waiting for Data  ");
 FLASH_STRING(string_shome2, "   No GPS 3D FIX    ");
 FLASH_STRING(string_shome3, "3D FIX! Alt:");
