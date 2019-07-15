@@ -95,13 +95,13 @@
 
 //pinout for Arduino Mega 1280/2560
 #ifdef MEGA
-#define PAN_SERVOPIN     11   //PWM Pin for pan servo ---> (PB5) - APM OUT PWM 2
-#define TILT_SERVOPIN    12   //PWM Pin for tilt servo ---> (PB6) - APM OUT PWM 1
-#define LEFT_BUTTON_PIN  32   //Any Digital pin ---> (PC5)
-#define RIGHT_BUTTON_PIN 34   //Any Digital pin ---> (PC3)
-#define ENTER_BUTTON_PIN 36   //Any Digital pin ---> (PC1)
-#define ADC_VOLTAGE      41   //(A5) ADC pin used for voltage reading
-#define BUZZER_PIN        8   //(PH5) Any PWM pin ((add a 100-150 ohm resistor between buzzer & ground) ---> (PH5?) - APM OUT PWM 3
+#define PAN_SERVOPIN     11   // PWM Pin for pan servo            ---> (PB5) - APM PWM OUT ch. 2
+#define TILT_SERVOPIN    12   // PWM Pin for tilt servo           ---> (PB6) - APM PWM OUT ch. 1
+#define LEFT_BUTTON_PIN  7    // Any Digital pin                  ---> (PH4) - APM PWM OUT ch. 4 (button should short to GND)
+#define RIGHT_BUTTON_PIN 6    // Any Digital pin                  ---> (PH3) - APM PWM OUT ch. 5 (button should short to GND)
+#define ENTER_BUTTON_PIN 3    // Any Digital pin                  ---> (PE5) - APM PWM OUT ch. 6 (button should short to GND)
+#define ADC_VOLTAGE      54   // ADC pin used for voltage reading ---> (PF0) - APM A0 port
+#define BUZZER_PIN        8   // Any PWM pin (add a 100-150 ohm resistor between buzzer & ground) ---> (PH5) - APM PWM OUT ch. 3
 #endif
 
 //################################################## DEBUG ##########################################################
