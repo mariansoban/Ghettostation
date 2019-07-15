@@ -1,40 +1,40 @@
 /*
-   GPS_NMEA.cpp - Generic NMEA GPS library for Arduino
-   Code by Jordi Muñoz and Jose Julio. DIYDrones.com
-   This code works with boards based on ATMega168/328 and ATMega1280 (Serial port 1)
+ GPS_NMEA.cpp - Generic NMEA GPS library for Arduino
+ Code by Jordi Muñoz and Jose Julio. DIYDrones.com
+ This code works with boards based on ATMega168/328 and ATMega1280 (Serial port 1)
 
-   This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
 
-   GPS configuration : NMEA protocol
-   Baud rate : 38400
-   NMEA Sentences :
-   $GPGGA : Global Positioning System Fix Data
-   $GPVTG : Ttack and Ground Speed
+ GPS configuration : NMEA protocol
+ Baud rate : 38400
+ NMEA Sentences :
+ $GPGGA : Global Positioning System Fix Data
+ $GPVTG : Ttack and Ground Speed
 
-   Methods:
-   Init() : GPS Initialization
-   Read() : Call this funcion as often as you want to ensure you read the incomming gps data
+ Methods:
+ Init() : GPS Initialization
+ Read() : Call this funcion as often as you want to ensure you read the incomming gps data
 
-   Properties:
-   Lattitude : Lattitude * 10000000 (long value)
-   Longitude : Longitude * 10000000 (long value)
-   Altitude :  Altitude * 1000 (milimeters) (long value)
-   Ground_speed : Speed (m/s) * 100 (long value)
-   Ground_course : Course (degrees) * 100 (long value)
-   Type : 2 (This indicate that we are using the Generic NMEA library)
-   NewData : 1 when a new data is received.
-            You need to write a 0 to NewData when you read the data
-   Fix : >=1: GPS FIX, 0: No Fix (normal logic)
-   Quality : 0 = No Fix
-             1 = Bad (Num sats < 5)
-       2 = Poor
-       3 = Medium
-       4 = Good
+ Properties:
+ Lattitude : Lattitude * 10000000 (long value)
+ Longitude : Longitude * 10000000 (long value)
+ Altitude :  Altitude * 1000 (milimeters) (long value)
+ Ground_speed : Speed (m/s) * 100 (long value)
+ Ground_course : Course (degrees) * 100 (long value)
+ Type : 2 (This indicate that we are using the Generic NMEA library)
+ NewData : 1 when a new data is received.
+ You need to write a 0 to NewData when you read the data
+ Fix : >=1: GPS FIX, 0: No Fix (normal logic)
+ Quality : 0 = No Fix
+ 1 = Bad (Num sats < 5)
+ 2 = Poor
+ 3 = Medium
+ 4 = Good
 
-   NOTE : This code has been tested on a Locosys 20031 GPS receiver (MTK chipset)
+ NOTE : This code has been tested on a Locosys 20031 GPS receiver (MTK chipset)
  */
 
 #if defined(PROTOCOL_NMEA)

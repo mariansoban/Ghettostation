@@ -1,35 +1,35 @@
 /*
-   GPS_UBLOX.cpp - Ublox GPS library for Arduino
-   Code by Jordi Muñoz and Jose Julio. DIYDrones.com
-   This code works with boards based on ATMega168/328 and ATMega1280 (Serial port 1)
+ GPS_UBLOX.cpp - Ublox GPS library for Arduino
+ Code by Jordi Muñoz and Jose Julio. DIYDrones.com
+ This code works with boards based on ATMega168/328 and ATMega1280 (Serial port 1)
 
-   This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
 
-   GPS configuration : Ublox protocol
-   Baud rate : 38400
-   Active messages :
-   NAV-POSLLH Geodetic Position Solution, PAGE 66 of datasheet
-   NAV-VELNED Velocity Solution in NED, PAGE 71 of datasheet
-   NAV-STATUS Receiver Navigation Status
-    or
-   NAV-SOL Navigation Solution Information
+ GPS configuration : Ublox protocol
+ Baud rate : 38400
+ Active messages :
+ NAV-POSLLH Geodetic Position Solution, PAGE 66 of datasheet
+ NAV-VELNED Velocity Solution in NED, PAGE 71 of datasheet
+ NAV-STATUS Receiver Navigation Status
+ or
+ NAV-SOL Navigation Solution Information
 
-   Methods:
-   Init() : GPS Initialization
-   Read() : Call this funcion as often as you want to ensure you read the incomming gps data
+ Methods:
+ Init() : GPS Initialization
+ Read() : Call this funcion as often as you want to ensure you read the incomming gps data
 
-   Properties:
-   Lattitude : Lattitude * 10000000 (long value)
-   Longitude : Longitude * 10000000 (long value)
-   Altitude :  Altitude * 100 (meters) (long value)
-   Ground_speed : Speed (m/s) * 100 (long value)
-   Ground_course : Course (degrees) * 100 (long value)
-   NewData : 1 when a new data is received.
-            You need to write a 0 to NewData when you read the data
-   Fix : 1: GPS FIX, 0: No Fix (normal logic)
+ Properties:
+ Lattitude : Lattitude * 10000000 (long value)
+ Longitude : Longitude * 10000000 (long value)
+ Altitude :  Altitude * 100 (meters) (long value)
+ Ground_speed : Speed (m/s) * 100 (long value)
+ Ground_course : Course (degrees) * 100 (long value)
+ NewData : 1 when a new data is received.
+ You need to write a 0 to NewData when you read the data
+ Fix : 1: GPS FIX, 0: No Fix (normal logic)
 
  */
 #if defined(PROTOCOL_UBLOX)
