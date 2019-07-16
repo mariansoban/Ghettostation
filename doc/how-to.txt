@@ -1,0 +1,10 @@
+# prerequest - platformio installed and set to path
+
+# build
+platformio run
+
+# upload
+platformio run -t upload
+
+# create eclipse descriptors - requires some editing later - call in different folder
+platformio init --ide eclipse --board megaatmega2560
