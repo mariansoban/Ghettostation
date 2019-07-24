@@ -275,7 +275,7 @@ void clear_eeprom() {
         configuration.tilt_maxpwm = TILT_MAXPWM;
         configuration.tilt_maxangle = TILT_MAXANGLE;
         // configuration.baudrate = 6;
-        configuration.baudrate = 2; // set default baud rate to 2400
+        configuration.baudrate = 1; // set default baud rate to 2400
         // configuration.telemetry = 0;
         configuration.telemetry = 2; // set default telemetry protocol to LTM
         configuration.bearing = 0;

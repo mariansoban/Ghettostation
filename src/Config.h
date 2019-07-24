@@ -1,7 +1,7 @@
 /*############################################## CONFIGURATION ####################################################
  # Comment/uncomment/edit according to your needs.
  ##################################################################################################################*/
-#define CONFIG_VERSION 1003 // Changing this will reset eeprom to default values
+#define CONFIG_VERSION 1005 // Changing this will reset eeprom to default values
 
 //########## OPTIONS ###############################################################################################
 
@@ -44,35 +44,35 @@
 // Minimum voltage for lipo alert
 //########### GROUND OSD TELEMETRY OUTPUT #########################################################################
 // Activate osd output (comment if not needed)
-#define OSD_OUTPUT
+// #define OSD_OUTPUT
 //OSD output baudrate ( send data as fast as possible to the osd, no need to have the same baudrate as input one. )
 #define OSD_BAUD 57600
 //########### LCD ##################################################################################################
 //LCD model
-// #define LCDLCM1602 // (adress: 0x27 or 0x20) HobbyKing IIC/I2C/TWI Serial 2004 20x4, LCM1602 IIC A0 A1 A2 & YwRobot Arduino LCM1602 IIC V1
+#define LCDLCM1602 // (adress: 0x27 or 0x20) HobbyKing IIC/I2C/TWI Serial 2004 20x4, LCM1602 IIC A0 A1 A2 & YwRobot Arduino LCM1602 IIC V1
 //#define LCDGYLCD  // (adress: 0x20) Arduino-IIC-LCD GY-LCD-V1Arduino-IIC-LCD GY-LCD-V1
 //#define LCD03I2C  // (adress: 0x63 or  0xc6) LCD03 / LCD05
 //#define GLCDEnable // Graphical LCD - Using system5x7 font so its nearly 20x4 size
-#define OLEDLCD  // Oled 128x64 i2c LCD (address 0x3C or 0x3D)
+// #define OLEDLCD  // Oled 128x64 i2c LCD (address 0x3C or 0x3D)
 
 // I2C LCD Adress
-// #define I2CADRESS 0x27 // LCD03/05 have 0x63 or 0xc6 ( even if it's written 0xc6 when powering the lcd03, in fact it uses 0x63 so try booth)
+#define I2CADRESS 0x27 // LCD03/05 have 0x63 or 0xc6 ( even if it's written 0xc6 when powering the lcd03, in fact it uses 0x63 so try booth)
 // LCM1602 uses 0x27 & GY-LCD use 0x20
 // OLED_LCD use 0x3d or 0x3d
-#define I2CADRESS 0x3C
+// #define I2CADRESS 0x3C
 //#################################### SERVOS ENDPOINTS #############################################################
 // NO NEED TO EDIT THIS
 //. Those are just default values when not configured.
 // To prevent burning servo they boot starts at neutral for all values. Adjust them directly from the menu.
 
-#define PAN_MAXPWM 1500     //max pan servo pwm value
-#define PAN_MAXANGLE 90     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
-#define PAN_MINPWM 1500     //min pan servo pwm valuemin pan servo pwm value
-#define PAN_MINANGLE 90      //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
+#define PAN_MAXPWM  2000     //max pan servo pwm value
+#define PAN_MAXANGLE 180     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
+#define PAN_MINPWM  1000     //min pan servo pwm valuemin pan servo pwm value
+#define PAN_MINANGLE 180      //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
 
 #define TILT_MAXPWM 1500    //max tilt pwm value
 #define TILT_MAXANGLE 90    //max tilt angle considering 0° is facing toward.
-#define TILT_MINPWM 1500    //min tilt pwm value
+#define TILT_MINPWM 1000    //min tilt pwm value
 #define TILT_MINANGLE 0     //minimum tilt angle. Considering 0 is facing toward, a -10 value would means we can tilt 10° down.
 
 //########################################### BOARDS PINOUTS #########################################################

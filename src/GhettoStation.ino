@@ -94,6 +94,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 #endif
 
 //##### LOOP RATES
+Metro loop5s = Metro(5000); // 5s loop
 Metro loop1hz = Metro(1000); // 1hz loop
 Metro loop10hz = Metro(100); //10hz loop
 Metro loop50hz = Metro(20); // 50hz loop
@@ -171,6 +172,13 @@ void setup() {
 //######################################## MAIN LOOP #####################################################################
 void loop() {
 
+    if (loop5s.check()) {
+        //debug output to usb Serial
+#if defined(DEBUG)
+        debug();
+#endif
+    }
+
     if (loop1hz.check()) {
         read_voltage();
     }
@@ -188,10 +196,6 @@ void loop() {
         check_activity();
         //update lcd screen
         refresh_lcd();
-        //debug output to usb Serial
-#if defined(DEBUG)
-        debug();
-#endif
         switch (buzzer_status) {
         case 1:
             playTones(1);
@@ -1091,6 +1095,7 @@ void playTones(uint8_t alertlevel) {
 
 #if defined(DEBUG)
 void debug() {
+    Serial.println("================================");
     Serial.print("mem ");
     int freememory = freeMem();
     Serial.println(freememory);
