@@ -2,9 +2,6 @@
  # Comment/uncomment/edit according to your needs.
  ##################################################################################################################*/
 #define CONFIG_VERSION 1003 // Changing this will reset eeprom to default values
-//########## BOARD ################################################################################################
-// #define TEENSYPLUS2 // Teensy++2 support.
-#define MEGA // Arduino Mega board
 
 //########## OPTIONS ###############################################################################################
 
@@ -80,21 +77,8 @@
 
 //########################################### BOARDS PINOUTS #########################################################
 //DON'T EDIT THIS IF YOU DON'T KNOW WHAT YOU'RE DOINGG
-//pinout for TEENSY++ 2
-#ifdef TEENSYPLUS2
-  #define PAN_SERVOPIN     26    //PWM Pin for pan servo
-  #define TILT_SERVOPIN    25    //PWM Pin for tilt servo
-  #define LEFT_BUTTON_PIN  10    //Any Digital pin
-  #define RIGHT_BUTTON_PIN  9    //Any Digital pin
-  #define ENTER_BUTTON_PIN  8    //Any Digital pin
-  #define SOFTSERIAL_TX    14    //Digital pin used by SoftSerial for sending data to ground osd.
-  #define SOFTSERIAL_RX     0    //Digital pin used by SoftSerial for receiving data from ground osd. ( unused yet )
-  #define ADC_VOLTAGE      38    //(F0) ADC pin used for voltage reading
-  #define BUZZER_PIN       16    //(C6) Any PWM pin (add a 100-150 ohm resistor between buzzer & ground)
-#endif
 
 //pinout for Arduino Mega 1280/2560
-#ifdef MEGA
 #define PAN_SERVOPIN     11   // PWM Pin for pan servo            ---> (PB5) - APM PWM OUT ch. 2
 #define TILT_SERVOPIN    12   // PWM Pin for tilt servo           ---> (PB6) - APM PWM OUT ch. 1
 #define LEFT_BUTTON_PIN  7    // Any Digital pin                  ---> (PH4) - APM PWM OUT ch. 4 (button should short to GND)
@@ -102,7 +86,6 @@
 #define ENTER_BUTTON_PIN 3    // Any Digital pin                  ---> (PE5) - APM PWM OUT ch. 6 (button should short to GND)
 #define ADC_VOLTAGE      54   // ADC pin used for voltage reading ---> (PF0) - APM A0 port
 #define BUZZER_PIN        8   // Any PWM pin (add a 100-150 ohm resistor between buzzer & ground) ---> (PH5) - APM PWM OUT ch. 3
-#endif
 
 //################################################## DEBUG ##########################################################
 #define DEBUG

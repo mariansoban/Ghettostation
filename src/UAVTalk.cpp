@@ -85,38 +85,38 @@ void uavtalk_send_msg(uavtalk_message_t *msg) {
         return;
 
     c = (uint8_t) (msg->Sync);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[0 ^ c];
     c = (uint8_t) (msg->MsgType);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) (msg->Length & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) ((msg->Length >> 8) & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) (msg->ObjID & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) ((msg->ObjID >> 8) & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) ((msg->ObjID >> 16) & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     c = (uint8_t) ((msg->ObjID >> 24) & 0xff);
-    SerialPort1.write(c);
+    Serial1.write(c);
     msg->Crc = crc_table[msg->Crc ^ c];
     if (msg->Length > 8) {
         d = msg->Data;
         for (i = 0; i < msg->Length - 8; i++) {
             c = *d++;
-            SerialPort1.write(c);
+            Serial1.write(c);
             msg->Crc = crc_table[msg->Crc ^ c];
         }
     }
-    SerialPort1.write(msg->Crc);
+    Serial1.write(msg->Crc);
 }
 
 void uavtalk_respond_object(uavtalk_message_t *msg_to_respond, uint8_t type) {
@@ -290,8 +290,8 @@ int uavtalk_read(void) {
     uint8_t show_prio_info = 0;
 
     // grabbing data
-    while (SerialPort1.available() > 0) {
-        uint8_t c = SerialPort1.read();
+    while (Serial1.available() > 0) {
+        uint8_t c = Serial1.read();
 
         // parse data to msg
         if (uavtalk_parse_char(c, &msg)) {

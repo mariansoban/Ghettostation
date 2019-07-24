@@ -22,7 +22,7 @@ void request_mavlink_rates() {
         mavlink_msg_request_data_stream_pack(127, 0, &msg, 7, 1, MAVStreams[i], MAVRates[i], 1);
         uint8_t buf[MAVLINK_MAX_PACKET_LEN];
         uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
-        SerialPort1.write(buf, len);
+        Serial1.write(buf, len);
     }
 }
 
@@ -31,8 +31,8 @@ void read_mavlink() {
     mavlink_status_t status;
 
     //grabing data
-    while (SerialPort1.available() > 0) {
-        uint8_t c = SerialPort1.read();
+    while (Serial1.available() > 0) {
+        uint8_t c = Serial1.read();
         //Serial.print(c,HEX);Serial.print(" ");
 
         //trying to grab msg

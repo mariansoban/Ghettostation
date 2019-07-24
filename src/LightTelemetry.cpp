@@ -52,8 +52,8 @@ void ltm_read() {
     }
     c_state = IDLE;
 
-    while (SerialPort1.available()) {
-        c = char(SerialPort1.read());
+    while (Serial1.available()) {
+        c = char(Serial1.read());
 
         if (c_state == IDLE) {
             c_state = (c=='$') ? HEADER_START1 : IDLE;
@@ -168,9 +168,9 @@ static boolean send_LTM_Packet(uint8_t *LTPacket, uint8_t LTPacket_size)
     boolean packet_dropped = false;
     uint32_t frame_timer = millis();
     for (i = 0; i<LTPacket_size; i++) {
-        if(SerialPort2.write(LTPacket[i]) == 0 ) {
+        if(Serial2.write(LTPacket[i]) == 0 ) {
             //buffer is full, flush & retry.
-            SerialPort2.flush();
+            Serial2.flush();
             byte_dropped = true;
             //break;   //abort until the buffer is empty will resend a new frame.
             if (millis() - frame_timer >= 100) {

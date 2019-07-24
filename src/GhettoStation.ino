@@ -23,9 +23,6 @@
 #endif
 #include <PWMServo.h>
 
-#ifdef TEENSYPLUS2
-#include <SoftwareSerial.h>
-#endif
 #include <Wire.h>
 
 #include <Metro.h>
@@ -746,10 +743,10 @@ void configure_voltage_ratio(MenuItem *p_menu_item) {
 
 //######################################## TELEMETRY FUNCTIONS #############################################
 void init_serial() {
-    Serial.begin(57600);
-    SerialPort1.begin(baudrates[configuration.baudrate]);
+    Serial.begin(115200);
+    Serial1.begin(baudrates[configuration.baudrate]);
 #ifdef OSD_OUTPUT
-    SerialPort2.begin(OSD_BAUD);
+    Serial2.begin(OSD_BAUD);
 #endif
 #ifdef DEBUG
     Serial.println("Serial initialised");
