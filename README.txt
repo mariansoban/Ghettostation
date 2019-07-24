@@ -12,16 +12,16 @@ All setup & usage instruction are now on the Wiki:
 Project is separe in 3 different software:
 
  - Ghettostation: Main groundstation/antenna tracker software running on 
-                  Teensy++2 or Arduino Mega. Reads data from UAVTalk, MAVLink,
+                  Teensy++2 (REMOVED) or Arduino Mega. Reads data from UAVTalk, MAVLink,
                   Multiwii MSP, NMEA GPS, Ublox GPS. 
                   
- - GhettOSD:      Minimosd software for ground osd within the Ghettostation.
+ - GhettOSD:      Minimosd software for ground osd within the Ghettostation. (REMOVED)
  
  - GhettoProxy:   Simple LTM (Lighttelemetry) telemetry converter running on
                   Arduino mini.
                   Takes UAVTalk, MAVlink, MSP, NMEA, Ublox protocols &
                   converts it to LTM. Allows using really low baudrate 
-                  wireless serial links.
+                  wireless serial links. (REMOVED)
                   
  
 Credits:

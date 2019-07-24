@@ -1,3 +1,4 @@
+BUILD
 # prerequest - platformio installed and set to path
 
 # build
@@ -8,3 +9,35 @@ platformio run -t upload
 
 # create eclipse descriptors - requires some editing later - call in different folder
 platformio init --ide eclipse --board megaatmega2560
+
+=====================================================
+WIRING FOR APM (ArdupilotMega 2.5)
+
+1) Telemetry input - use GPS port (APM's Serial1)
+	DF13 case pins left to right:
+	1 GND <---> telmetry GND
+	2 NC
+	3 Rx  <---> telemetry Tx (e.g. modem module Tx)
+	4 Tx
+	5 5V  <---> telemetry 5V
+	
+2) Display - use I2C connector
+	DF13 pins from edge of APM
+	1 GND <---> diplay GND
+	2 SDA <---> diplay SDA
+	3 SCL <---> diplay SCL
+	4 5V  <---> diplay 5V
+	
+3) Buttons
+	APM PWM OUTPUT 4 <---> button LEFT
+	APM PWM OUTPUT 5 <---> button RIGHT	
+	APM PWM OUTPUT 6 <---> button ENTER
+	connect seconds pins of all 3 buttons to any GND at APM board
+	
+4) Servos
+	APM PWM OUTPUT 1 <---> tracker TILT servo (PWM)
+	APM PWM OUTPUT 2 <---> tracker PAN servo (PWM)	
+
+5) Buzzer
+	APM PWM OUTPUT 3 <---> buzer (+)
+	
