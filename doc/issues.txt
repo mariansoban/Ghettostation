@@ -1,0 +1,30 @@
+GPS FIX TYPE
+https://github.com/mariansoban/ardupilot/commit/cd364418bd74062dbb4bc8455ad3499d37dbcd6e
+    if(_ahrs.get_position(loc)) {
+        _uav.lat = loc.lat;      
+        _uav.lon = loc.lng;		
+        _uav.gndspeed = (uint8_t)roundf(gps.ground_speed());
+		_uav.alt = (int32_t)roundf(alt); 
+		_uav.sats_visible = (uint8_t)AP::gps().num_sats(); 		
+		_uav.fix_type = (uint8_t)AP::gps().status();		      
+
+	} else {
+        _uav.lat = 0;      
+        _uav.lon = 0;  
+		_uav.gndspeed = 0;
+		_uav.alt = (int32_t)roundf(alt);
+		_uav.sats_visible = (uint8_t)AP::gps().num_sats(); 		
+		_uav.fix_type = (uint8_t)AP::gps().status();
+
+--> issue in ArduPilot part:
+
+https://github.com/mariansoban/ardupilot/commit/cd364418bd74062dbb4bc8455ad3499d37dbcd6e
+libraries/AP_LTM/AP_LTM.cpp
+
+// GPS frame
+void AP_LTM::generate_Gframe(void){
+...
+LTBuff[16]= ((_uav.sats_visible << 2 )& 0xFF) | (_uav.fix_type & 0b00000011) ; // last 6 bits: sats number, first 2:fix type (0,1,2,3)
+
+6 bits - num. of sats
+2 bits - gps fix type - if > 3 we need to set to 3
