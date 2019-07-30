@@ -25,6 +25,8 @@
 
 #include <Wire.h>
 
+#include <CheapStepper.h>
+
 #include <Metro.h>
 #include <MenuSystem.h>
 #include <Button.h>
