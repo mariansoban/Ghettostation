@@ -269,7 +269,8 @@ void check_activity() {
             detach_servo(pan_servo);
             attach_servo(pan_servo, PAN_SERVOPIN, servoconf_tmp[0], configuration.pan_maxpwm);
         }
-        pan_servo.writeMicroseconds(servoconf_tmp[0]);
+        // pan_servo.writeMicroseconds(servoconf_tmp[0]);
+        move_servo(pan_servo, servoconf_tmp[0]);
         //pan_servo.write(0);
         servoconfprev_tmp[0] = servoconf_tmp[0];
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
@@ -283,7 +284,8 @@ void check_activity() {
         break;
     case 4:             //PAN_MINANGLE
         configuration.pan_minangle = config_servo(1, 2, configuration.pan_minangle);
-        pan_servo.writeMicroseconds(configuration.pan_minpwm);
+        // pan_servo.writeMicroseconds(configuration.pan_minpwm);
+        move_servo(pan_servo, configuration.pan_minpwm);
         //pan_servo.write(0);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
@@ -297,7 +299,8 @@ void check_activity() {
             detach_servo(pan_servo);
             attach_servo(pan_servo, PAN_SERVOPIN, configuration.pan_minpwm, servoconf_tmp[1]);
         }
-        pan_servo.writeMicroseconds(servoconf_tmp[1]);
+        // pan_servo.writeMicroseconds(servoconf_tmp[1]);
+        move_servo(pan_servo, servoconf_tmp[1]);
         //pan_servo.write(180);
         servoconfprev_tmp[1] = servoconf_tmp[1];
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
@@ -312,7 +315,8 @@ void check_activity() {
 
     case 6:             //PAN_MAXANGLE
         configuration.pan_maxangle = config_servo(1, 4, configuration.pan_maxangle);
-        pan_servo.writeMicroseconds(configuration.pan_maxpwm);
+        // pan_servo.writeMicroseconds(configuration.pan_maxpwm);
+        move_servo(pan_servo, configuration.pan_maxpwm);
         //pan_servo.write(180);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
@@ -326,7 +330,8 @@ void check_activity() {
             detach_servo(tilt_servo);
             attach_servo(tilt_servo, TILT_SERVOPIN, servoconf_tmp[2], configuration.tilt_maxpwm);
         }
-        tilt_servo.writeMicroseconds(servoconf_tmp[2]);
+        // tilt_servo.writeMicroseconds(servoconf_tmp[2]);
+        move_servo(tilt_servo, servoconf_tmp[2]);
         //tilt_servo.write(0);
         servoconfprev_tmp[2] = servoconf_tmp[2];
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
@@ -335,13 +340,13 @@ void check_activity() {
             detach_servo(tilt_servo);
             attach_servo(tilt_servo, TILT_SERVOPIN, configuration.tilt_minpwm, configuration.tilt_maxpwm);
             move_servo(tilt_servo, 2, 0, configuration.tilt_minangle, configuration.tilt_maxangle);
-            ;
             current_activity = 0;
         }
         break;
     case 8:             //TILT_MINANGLE
         configuration.tilt_minangle = config_servo(2, 2, configuration.tilt_minangle);
-        tilt_servo.writeMicroseconds(configuration.tilt_minpwm);
+        // tilt_servo.writeMicroseconds(configuration.tilt_minpwm);
+        move_servo(tilt_servo, configuration.tilt_minpwm);
         //tilt_servo.write(0);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
@@ -355,7 +360,8 @@ void check_activity() {
             detach_servo(tilt_servo);
             attach_servo(tilt_servo, TILT_SERVOPIN, configuration.tilt_minpwm, servoconf_tmp[3]);
         }
-        tilt_servo.writeMicroseconds(servoconf_tmp[3]);
+        // tilt_servo.writeMicroseconds(servoconf_tmp[3]);
+        move_servo(tilt_servo, servoconf_tmp[3]);
         //tilt_servo.write(180);
         servoconfprev_tmp[3] = servoconf_tmp[3];
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
@@ -369,7 +375,8 @@ void check_activity() {
         break;
     case 10:                //TILT_MAXANGLE
         configuration.tilt_maxangle = config_servo(2, 4, configuration.tilt_maxangle);
-        tilt_servo.writeMicroseconds(configuration.tilt_maxpwm);
+        // tilt_servo.writeMicroseconds(configuration.tilt_maxpwm);
+        move_servo(tilt_servo, configuration.tilt_maxpwm);
         //tilt_servo.write(180);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
@@ -880,12 +887,18 @@ void move_servo(PWMServo &s, int stype, int a, int mina, int maxa) {
             a = mina - (360 - a);
         // map angle to microseconds
         int microsec = map(a, 0, mina + maxa, configuration.pan_minpwm, configuration.pan_maxpwm);
-        s.writeMicroseconds(microsec);
+        // s.writeMicroseconds(microsec);
+        move_servo(s, microsec);
     } else if (stype == 2) {
         //map angle to microseconds
         int microsec = map(a, mina, maxa, configuration.tilt_minpwm, configuration.tilt_maxpwm);
-        s.writeMicroseconds(microsec);
+        // s.writeMicroseconds(microsec);
+        move_servo(s, microsec);
     }
+}
+
+void move_servo(PWMServo &s, int microsec) {
+    s.writeMicroseconds(microsec);
 }
 
 void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
