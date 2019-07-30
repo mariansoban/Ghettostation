@@ -66,14 +66,17 @@ void ltm_read() {
         else if (c_state == HEADER_START2) {
             switch (c) {
                 case 'G':
+                // Serial.println("FRAME G" );
                 LTMframelength = LIGHTTELEMETRY_GFRAMELENGTH;
                 c_state = HEADER_MSGTYPE;
                 break;
                 case 'A':
+                // Serial.println("FRAME A" );
                 LTMframelength = LIGHTTELEMETRY_AFRAMELENGTH;
                 c_state = HEADER_MSGTYPE;
                 break;
                 case 'S':
+                // Serial.println("FRAME S" );
                 LTMframelength = LIGHTTELEMETRY_SFRAMELENGTH;
                 c_state = HEADER_MSGTYPE;
                 break;
