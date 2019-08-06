@@ -25,7 +25,7 @@
 
 // Prevent Ghettostation to send packets to the flightcontroler
 // Usefull if you're using OSD or a GCS at the same time.
-#define PASSIVEMODE 0
+#define PASSIVEMODE 1
 
 // Default tilt angle used when not tracking.
 #define DEFAULTELEVATION  15
@@ -79,13 +79,13 @@
 //DON'T EDIT THIS IF YOU DON'T KNOW WHAT YOU'RE DOINGG
 
 //pinout for Arduino Mega 1280/2560
-#define PAN_SERVOPIN     11   // PWM Pin for pan servo            ---> (PB5) - APM PWM OUT ch. 2
 #define TILT_SERVOPIN    12   // PWM Pin for tilt servo           ---> (PB6) - APM PWM OUT ch. 1
+#define PAN_SERVOPIN     11   // PWM Pin for pan servo            ---> (PB5) - APM PWM OUT ch. 2
+#define BUZZER_PIN        8   // Any PWM pin (add a 100-150 ohm resistor between buzzer & ground) ---> (PH5) - APM PWM OUT ch. 3
 #define LEFT_BUTTON_PIN  7    // Any Digital pin                  ---> (PH4) - APM PWM OUT ch. 4 (button should short to GND)
 #define RIGHT_BUTTON_PIN 6    // Any Digital pin                  ---> (PH3) - APM PWM OUT ch. 5 (button should short to GND)
 #define ENTER_BUTTON_PIN 3    // Any Digital pin                  ---> (PE5) - APM PWM OUT ch. 6 (button should short to GND)
-#define ADC_VOLTAGE      54   // ADC pin used for voltage reading ---> (PF0) - APM A0 port
-#define BUZZER_PIN        8   // Any PWM pin (add a 100-150 ohm resistor between buzzer & ground) ---> (PH5) - APM PWM OUT ch. 3
+#define ADC_VOLTAGE      62   // ADC pin used for voltage reading ---> (PK0) - APM A8 port ~ 9th ADC port
 
 //################################################## DEBUG ##########################################################
 #define DEBUG
