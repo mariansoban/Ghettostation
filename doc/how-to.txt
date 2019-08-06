@@ -7,8 +7,12 @@ platformio run
 # upload
 platformio run -t upload
 
+# create eclipse descriptors
+platformio -f -c eclipse init --ide eclipse
+
 # create eclipse descriptors - requires some editing later - call in different folder
-platformio init --ide eclipse --board megaatmega2560
+# platformio init --ide eclipse --board megaatmega2560
+ 
 
 =====================================================
 WIRING FOR APM (ArdupilotMega 2.5)
@@ -29,15 +33,24 @@ WIRING FOR APM (ArdupilotMega 2.5)
 	4 5V  <---> diplay 5V
 	
 3) Buttons
-	APM PWM OUTPUT 4 <---> button LEFT
-	APM PWM OUTPUT 5 <---> button RIGHT	
-	APM PWM OUTPUT 6 <---> button ENTER
+	APM PWM OUTPUT 4 (PH4 ~ 7) <---> button LEFT
+	APM PWM OUTPUT 5 (PH3 ~ 6) <---> button RIGHT
+	APM PWM OUTPUT 6 (PE5 ~ 3) <---> button ENTER
 	connect seconds pins of all 3 buttons to any GND at APM board
-	
+
 4) Servos
-	APM PWM OUTPUT 1 <---> tracker TILT servo (PWM)
-	APM PWM OUTPUT 2 <---> tracker PAN servo (PWM)	
+	APM PWM OUTPUT 1 (PB6 ~ 12) <---> tracker TILT servo (PWM)
+	APM PWM OUTPUT 2 (PB5 ~ 11) <---> tracker PAN servo (PWM)
 
 5) Buzzer
 	APM PWM OUTPUT 3 <---> buzer (+)
-	
+
+6) ULN2003 drivers for BYJ48 stepper motors
+	APM A0 (PF0 ~ 54) <---> PAN  ULN2003 IN1
+	APM A1 (PF1 ~ 55) <---> PAN  ULN2003 IN2
+	APM A2 (PF2 ~ 56) <---> PAN  ULN2003 IN3
+	APM A3 (PF3 ~ 57) <---> PAN  ULN2003 IN4
+	APM A4 (PF4 ~ 58) <---> TILT ULN2003 IN1
+	APM A5 (PF5 ~ 59) <---> TILT ULN2003 IN2
+	APM A6 (PF6 ~ 60) <---> TILT ULN2003 IN3
+	APM A7 (PF7 ~ 61) <---> TILT ULN2003 IN4
