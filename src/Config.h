@@ -75,10 +75,14 @@
 #define TILT_MINPWM 1000    //min tilt pwm value
 #define TILT_MINANGLE 0     //minimum tilt angle. Considering 0 is facing toward, a -10 value would means we can tilt 10° down.
 
-//########################################### BOARDS PINOUTS #########################################################
-//DON'T EDIT THIS IF YOU DON'T KNOW WHAT YOU'RE DOINGG
+//#################################### ULN2003 driver with BYJ48 Stepper Motors  #####################################
+// Activate ULN2003 driver (comment out if not needed)
+#define ULN2003
 
-//pinout for Arduino Mega 1280/2560
+//########################################### BOARDS PINOUTS #########################################################
+// DON'T EDIT THIS IF YOU DON'T KNOW WHAT YOU'RE DOINGG
+
+// pinout for Arduino Mega 1280/2560
 #define TILT_SERVOPIN    12   // PWM Pin for tilt servo           ---> (PB6) - APM PWM OUT ch. 1
 #define PAN_SERVOPIN     11   // PWM Pin for pan servo            ---> (PB5) - APM PWM OUT ch. 2
 #define BUZZER_PIN        8   // Any PWM pin (add a 100-150 ohm resistor between buzzer & ground) ---> (PH5) - APM PWM OUT ch. 3
@@ -87,6 +91,20 @@
 #define ENTER_BUTTON_PIN 3    // Any Digital pin                  ---> (PE5) - APM PWM OUT ch. 6 (button should short to GND)
 #define ADC_VOLTAGE      62   // ADC pin used for voltage reading ---> (PK0) - APM A8 port ~ 9th ADC port
 
+// ULN2003 driver with BYJ48 Stepper Motors
+#ifdef ULN2003
+#define ULN2003_PAN_IN1  54    // IN1 for pan servo  ---> APM A0 (PF0 ~ 54)
+#define ULN2003_PAN_IN2  55    // IN2 for pan servo  ---> APM A0 (PF1 ~ 55)
+#define ULN2003_PAN_IN3  56    // IN3 for pan servo  ---> APM A0 (PF2 ~ 56)
+#define ULN2003_PAN_IN4  57    // IN4 for pan servo  ---> APM A0 (PF3 ~ 57)
+#define ULN2003_TILT_IN1 58    // IN1 for pan servo  ---> APM A0 (PF4 ~ 58)
+#define ULN2003_TILT_IN2 59    // IN2 for tilt servo ---> APM A0 (PF5 ~ 59)
+#define ULN2003_TILT_IN3 60    // IN3 for tilt servo ---> APM A0 (PF6 ~ 60)
+#define ULN2003_TILT_IN4 61    // IN4 for tilt servo ---> APM A0 (PF7 ~ 61)
+#define ULN2003_RPM          7 // RPM of stepper motors
+#define ULN2003_PAN_REVERSE  0 // reverse pan stepper motor
+#define ULN2003_TILT_REVERSE 0 // reverse tilt stepper motor
+#endif
 //################################################## DEBUG ##########################################################
 #define DEBUG
 

@@ -25,7 +25,9 @@
 
 #include <Wire.h>
 
+#ifdef ULN2003
 #include <CheapStepper.h>
+#endif
 
 #include <Metro.h>
 #include <MenuSystem.h>
@@ -114,6 +116,12 @@ const uint8_t PAN = 1;
 // TILT movement case
 const uint8_t TILT = 2;
 
+// stepper mottors with ULN2003 driver
+#ifdef ULN2003
+CheapStepper stepper_pan (ULN2003_PAN_IN1, ULN2003_PAN_IN2, ULN2003_PAN_IN3, ULN2003_PAN_IN4);
+CheapStepper stepper_tilt (ULN2003_TILT_IN1, ULN2003_TILT_IN2, ULN2003_TILT_IN3, ULN2003_TILT_IN4);
+#endif
+
 //#################################### SETUP LOOP ####################################################
 
 void setup() {
@@ -159,6 +167,13 @@ void setup() {
 
     // move servo to neutral pan & DEFAULTELEVATION tilt at startup
     servoPathfinder(0, DEFAULTELEVATION);
+
+
+    // stepper mottors with ULN2003 driver - set RPM
+#ifdef ULN2003
+    stepper_pan.setRpm(ULN2003_RPM);
+    stepper_tilt.setRpm(ULN2003_RPM);
+#endif
 
     // setup button callback events
     enter_button.releaseHandler(enterButtonReleaseEvents);
@@ -223,6 +238,12 @@ void loop() {
         }
     }
     get_telemetry();
+
+    // move stepper mottors with ULN2003 driver
+#ifdef ULN2003
+    stepper_pan.run();
+    stepper_tilt.run();
+#endif
 }
 
 //######################################## ACTIVITIES #####################################################################
@@ -895,6 +916,43 @@ void move_servo(uint8_t servo_type, int microsec) {
         default:
             break;
     }
+
+#ifdef ULN2003
+    // handle ULN2003 drivers
+    // mapping: 1000 microsec = -180 degrees, 1500 microsec = 0 degrees, 2000 microsec = 180 degrees
+    int angle_degrees = map(microsec, 1000, 2000, -180, 180);
+    int angle_degrees_lim;
+    int angle;
+    bool cw_dir;
+    switch (servo_type) {
+        case PAN:
+            angle_degrees_lim = constrain(angle_degrees, configuration.pan_minangle, configuration.pan_maxangle);
+            if (angle_degrees_lim < 0) {
+                angle = -angle_degrees_lim;
+                cw_dir = false;
+            } else {
+                angle = angle_degrees_lim;
+                cw_dir = true;
+            }
+            cw_dir = ULN2003_PAN_REVERSE ? !cw_dir : cw_dir;
+            stepper_pan.newMoveToDegree(cw_dir, angle);
+            break;
+        case TILT:
+            angle_degrees_lim = constrain(angle_degrees, configuration.tilt_minangle, configuration.tilt_maxangle);
+            if (angle_degrees_lim < 0) {
+                angle = -angle_degrees_lim;
+                cw_dir = false;
+            } else {
+                angle = angle_degrees_lim;
+                cw_dir = true;
+            }
+            cw_dir = ULN2003_TILT_REVERSE ? !cw_dir : cw_dir;
+            stepper_tilt.newMoveToDegree(cw_dir, angle);
+            break;
+        default:
+            break;
+    }
+#endif
 }
 
 void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
