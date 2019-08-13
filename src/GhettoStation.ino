@@ -193,6 +193,7 @@ void setup() {
 
 //######################################## MAIN LOOP #####################################################################
 void loop() {
+    long start_time = millis();
 
     if (loop5s.check()) {
         //debug output to usb Serial
@@ -203,6 +204,13 @@ void loop() {
 
     if (loop1hz.check()) {
         read_voltage();
+
+        // calculate avg. loop time each second
+        if (loop_time_count > 0) {
+            last_avg_loop_time = ((float) loop_time_sum) / ((float) loop_time_count);
+            loop_time_sum = 0;
+            loop_time_count = 0;
+        }
     }
 
     if (loop10hz.check() == 1) {
@@ -244,6 +252,10 @@ void loop() {
     stepper_pan.run();
     stepper_tilt.run();
 #endif
+
+    // loop time stats
+    loop_time_sum += millis() - start_time;
+    loop_time_count++;
 }
 
 //######################################## ACTIVITIES #####################################################################

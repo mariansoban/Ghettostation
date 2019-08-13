@@ -118,7 +118,7 @@ void ltm_check() {
 
     if (LTMcmd==LIGHTTELEMETRY_GFRAME)
     {
-
+        last_ltm_gframe_time = millis();
         uav_lat = (int32_t)ltmread_u32();
         uav_lon = (int32_t)ltmread_u32();
         uav_groundspeedms = ltmread_u8();

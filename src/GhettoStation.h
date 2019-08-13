@@ -91,6 +91,12 @@ uint16_t test_servo_cnt = 360;
 //baudrate selection
 long baudrates[8] = { 1200, 2400, 4800, 9600, 19200, 38400, BAUDRATE56K, 115200 };
 
+unsigned long loop_time_sum = 0;
+unsigned int loop_time_count = 0;
+float last_avg_loop_time = 0;
+unsigned long last_ltm_gframe_time = 0;
+
+
 /*##################################### STRINGS STORED IN FLASH #############################################*/
 
 FLASH_STRING(string_load1, "  [GHETTOSTATION]   ");
