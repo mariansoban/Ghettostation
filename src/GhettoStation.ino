@@ -898,7 +898,6 @@ void get_telemetry() {
 //######################################## SERVOS #####################################################################
 
 void move_servo(uint8_t servo_type, int a, int mina, int maxa) {
-
     if (servo_type == PAN) {
         //convert angle for pan to pan servo reference point: 0° is pan_minangle
         if (a <= 180) {
@@ -929,46 +928,56 @@ void move_servo(uint8_t servo_type, int microsec) {
         default:
             break;
     }
+}
 
+void move_stepper(uint8_t servo_type, int angle_degrees) {
 #ifdef ULN2003
     // handle ULN2003 drivers
-    // mapping: 1000 microsec = -180 degrees, 1500 microsec = 0 degrees, 2000 microsec = 180 degrees
-    int angle_degrees = map(microsec, 1000, 2000, -180, 180);
-    int angle_degrees_lim;
-    int angle;
-    bool cw_dir;
-    switch (servo_type) {
+    if (current_activity == 1) {
+        // tracking....
+        int angle_degrees_lim;
+        int angle;
+        switch (servo_type) {
         case PAN:
             angle_degrees_lim = constrain(angle_degrees, configuration.pan_minangle, configuration.pan_maxangle);
-            if (angle_degrees_lim < 0) {
-                angle = -angle_degrees_lim;
-                cw_dir = false;
-            } else {
-                angle = angle_degrees_lim;
-                cw_dir = true;
-            }
-            cw_dir = ULN2003_PAN_REVERSE ? !cw_dir : cw_dir;
-            stepper_pan.newMoveToDegree(cw_dir, angle);
+            angle = ULN2003_PAN_REVERSE ? -angle_degrees_lim : angle_degrees_lim;
+            stepper_pan.newMoveToDegreeWithinOneRound(angle, true);
+#ifdef DEBUG
+            Serial.print("move_stepper: PAN input angle: ");
+            Serial.print(angle_degrees);
+            Serial.print("\tmoving to angle: ");
+            Serial.print(angle);
+            Serial.print("\t steps left: ");
+            Serial.println(stepper_pan.getStepsLeft());
+#endif
             break;
         case TILT:
             angle_degrees_lim = constrain(angle_degrees, configuration.tilt_minangle, configuration.tilt_maxangle);
-            if (angle_degrees_lim < 0) {
-                angle = -angle_degrees_lim;
-                cw_dir = false;
-            } else {
-                angle = angle_degrees_lim;
-                cw_dir = true;
-            }
-            cw_dir = ULN2003_TILT_REVERSE ? !cw_dir : cw_dir;
-            stepper_tilt.newMoveToDegree(cw_dir, angle);
+            angle = ULN2003_TILT_REVERSE ? -angle_degrees_lim : angle_degrees_lim;
+            stepper_tilt.newMoveToDegreeWithinOneRound(angle, true);
+#ifdef DEBUG
+            Serial.print("move_stepper: TILT input angle: ");
+            Serial.print(angle_degrees);
+            Serial.print("\tmoving to angle: ");
+            Serial.print(angle);
+            Serial.print("\t steps left: ");
+            Serial.println(stepper_tilt.getStepsLeft());
+#endif
             break;
         default:
             break;
+        }
     }
 #endif
 }
 
 void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
+#ifdef DEBUG
+    Serial.print("# servoPathfinder, angle_b (pan): ");
+    Serial.print(angle_b);
+    Serial.print("\tangle_a (tilt): ");
+    Serial.println(angle_a);
+#endif
 //find the best way to move pan servo considering 0° reference face toward
     if (angle_b <= 180) {
         if (configuration.pan_maxangle >= angle_b) {
@@ -1014,6 +1023,11 @@ void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
     }
     move_servo(PAN, angle_b, configuration.pan_minangle, configuration.pan_maxangle);
     move_servo(TILT, angle_a, configuration.tilt_minangle, configuration.tilt_maxangle);
+#ifdef ULN2003
+    // handle ULN2003 drivers
+    move_stepper(PAN, angle_b);
+    move_stepper(TILT, angle_a);
+#endif
 }
 
 void test_servos() {
