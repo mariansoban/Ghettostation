@@ -101,7 +101,7 @@
 #define ULN2003_TILT_IN2 59    // IN2 for tilt servo ---> APM A0 (PF5 ~ 59)
 #define ULN2003_TILT_IN3 60    // IN3 for tilt servo ---> APM A0 (PF6 ~ 60)
 #define ULN2003_TILT_IN4 61    // IN4 for tilt servo ---> APM A0 (PF7 ~ 61)
-#define ULN2003_RPM          12 // RPM of stepper motors
+#define ULN2003_RPM          15// RPM of stepper motors
 #define ULN2003_PAN_REVERSE  0 // reverse pan stepper motor
 #define ULN2003_TILT_REVERSE 0 // reverse tilt stepper motor
 #endif
