@@ -1181,22 +1181,34 @@ void debug1() {
     Serial.print("memory: ");
     int freememory = freeMem();
     Serial.print(freememory);
-    Serial.print("   current activity: ");
+    Serial.print("\tcurrent activity: ");
     Serial.print(current_activity);
-    Serial.print("   avg. loop time [ms]: ");
+    Serial.print("\tavg. loop time [ms]: ");
     Serial.print(last_avg_loop_time);
-    Serial.print("   avg. lopp [HZ]: ");
+    Serial.print("\tavg. lopp [HZ]: ");
     if (last_avg_loop_time > 0) {
         Serial.print(1000 / last_avg_loop_time);
     } else {
         Serial.print(0);
     }
-    Serial.print("   last gframe processed before [ms]: ");
+    Serial.print("\tlast gframe processed before [ms]: ");
     if (last_ltm_gframe_time > 0) {
         Serial.print(millis() - last_ltm_gframe_time);
     } else {
         Serial.print("N/A");
     }
+
+#ifdef ULN2003
+    float stepper_delay_ms = ((float) stepper_pan.getDelay()) / 1000;
+    Serial.print("\tsteppers RPM: ");
+    Serial.print(stepper_pan.getRpm());
+    Serial.print("\tsteppers delay [ms]: ");
+    Serial.print(stepper_delay_ms);
+    if (last_avg_loop_time > stepper_delay_ms) {
+        Serial.print(" ###");
+    }
+#endif
+
     Serial.println();
 }
 
