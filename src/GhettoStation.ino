@@ -979,6 +979,8 @@ void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
     Serial.println(angle_a);
 #endif
 //find the best way to move pan servo considering 0° reference face toward
+    int angle_b_org = angle_b;
+    int angle_a_org = angle_a;
     if (angle_b <= 180) {
         if (configuration.pan_maxangle >= angle_b) {
             //define limits
@@ -1025,8 +1027,8 @@ void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
     move_servo(TILT, angle_a, configuration.tilt_minangle, configuration.tilt_maxangle);
 #ifdef ULN2003
     // handle ULN2003 drivers
-    move_stepper(PAN, angle_b);
-    move_stepper(TILT, angle_a);
+    move_stepper(PAN, angle_b_org);
+    move_stepper(TILT, angle_a_org);
 #endif
 }
 
