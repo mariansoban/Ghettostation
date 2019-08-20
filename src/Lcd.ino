@@ -97,7 +97,8 @@ void refresh_lcd() {
         display.println(lcd_line3);
         display.println(lcd_line4);
         display.display();
-        delay(100); // FIXME [ms] this can't be here! - function called at 10Hz
+        // delay(100); // FIXME [ms] this can't be here! - function called at 10Hz
+        smartDelay(100, true);
 #endif
 
 #ifdef GLCDEnable

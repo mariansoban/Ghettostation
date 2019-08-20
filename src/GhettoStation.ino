@@ -193,91 +193,99 @@ void setup() {
 
 //######################################## MAIN LOOP #####################################################################
 void loop() {
-    long start_time = millis();
+    smartDelay(0, false);
+}
 
-    // move stepper mottors with ULN2003 driver
+static void smartDelay(unsigned long ms, bool ignore_lcd) {
+    unsigned long start = millis();
+    do {
+        long start_time = millis();
+
+        // move stepper mottors with ULN2003 driver
 #ifdef ULN2003
-    stepper_pan.run();
-    stepper_tilt.run();
+        stepper_pan.run();
+        stepper_tilt.run();
 #endif
 
-    if (loop5s.check()) {
-        //debug output to usb Serial
+        if (loop5s.check()) {
+            //debug output to usb Serial
 #if defined(DEBUG)
-        debug1();
-        // debug2();
+            debug1();
+            // debug2();
 #endif
-    }
-
-    if (loop1hz.check()) {
-        read_voltage();
-
-        // calculate avg. loop time each second
-        if (loop_time_count > 0) {
-            last_avg_loop_time = ((float) loop_time_sum) / ((float) loop_time_count);
-            loop_time_sum = 0;
-            loop_time_count = 0;
-            loop_time_longest = 0;
         }
-    }
 
-    if (loop10hz.check() == 1) {
-        //update buttons internal states
-        enter_button.isPressed();
-        left_button.isPressed();
-        right_button.isPressed();
+        if (loop1hz.check()) {
+            read_voltage();
+
+            // calculate avg. loop time each second
+            if (loop_time_count > 0) {
+                last_avg_loop_time = ((float) loop_time_sum) / ((float) loop_time_count);
+                loop_time_sum = 0;
+                loop_time_count = 0;
+                loop_time_longest = 0;
+            }
+        }
+
+        if (loop10hz.check() == 1) {
+            //update buttons internal states
+            enter_button.isPressed();
+            left_button.isPressed();
+            right_button.isPressed();
 #ifdef OSD_OUTPUT
-        //pack & send LTM packets to SerialPort2 at 10hz.
-        ltm_write();
+            //pack & send LTM packets to SerialPort2 at 10hz.
+            ltm_write();
 #endif
-        //current activity loop
-        check_activity();
+            //current activity loop
+            check_activity();
 
-        //update lcd screen
-        if (current_activity == 1) {
-            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
-                unsigned long start = micros();
-                // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
-                refresh_lcd();
-                Serial.print("#### refresh_lcd: ");
-                Serial.print(micros() - start);
-                Serial.println(" micros");
+            //update lcd screen
+            if (!ignore_lcd) {
+                if (current_activity == 1) {
+                    if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                        // unsigned long start = micros();
+                        // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
+                        refresh_lcd();
+                        // Serial.print("#### refresh_lcd: ");
+                        // Serial.print(micros() - start);
+                        // Serial.println(" micros");
+                    }
+                } else {
+                    refresh_lcd();
+                }
             }
-        } else {
-            refresh_lcd();
-        }
 
-        switch (buzzer_status) {
-        case 1:
-            playTones(1);
-            break;
-        case 2:
-            playTones(2);
-            break;
-        default:
-            break;
-        }
-    }
-    if (loop50hz.check() == 1) {
-        //update servos
-        if (current_activity == 1) {
-            if ((home_dist / 100) > DONTTRACKUNDER) {
-                servoPathfinder(Bearing, Elevation); // refresh servo
+            switch (buzzer_status) {
+            case 1:
+                playTones(1);
+                break;
+            case 2:
+                playTones(2);
+                break;
+            default:
+                break;
             }
         }
-    }
-    get_telemetry();
+        if (loop50hz.check() == 1) {
+            //update servos
+            if (current_activity == 1) {
+                if ((home_dist / 100) > DONTTRACKUNDER) {
+                    servoPathfinder(Bearing, Elevation); // refresh servo
+                }
+            }
+        }
+        get_telemetry();
 
-    lcd_slowdown_counter++;
+        lcd_slowdown_counter++;
 
-    // loop time stats
-    loop_time_count++;
-    unsigned long loop_time = millis() - start_time;
-    if (loop_time_longest < loop_time) {
-        loop_time_longest = loop_time;
-    }
-    loop_time_sum += loop_time;
-
+        // loop time stats
+        loop_time_count++;
+        unsigned long loop_time = millis() - start_time;
+        if (loop_time_longest < loop_time) {
+            loop_time_longest = loop_time;
+        }
+        loop_time_sum += loop_time;
+    } while (millis() - start < ms);
 }
 
 //######################################## ACTIVITIES #####################################################################
@@ -304,12 +312,12 @@ void check_activity() {
         } else if (home_bear) {
             antenna_tracking();
             if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
-                unsigned long start = micros();
+                // unsigned long start = micros();
                 // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD!
                 lcddisp_tracking();
-                Serial.print("#### lcddisp_tracking: ");
-                Serial.print(micros() - start);
-                Serial.println(" micros");
+                // Serial.print("#### lcddisp_tracking: ");
+                // Serial.print(micros() - start);
+                // Serial.println(" micros");
             }
             if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
                 current_activity = 0;
