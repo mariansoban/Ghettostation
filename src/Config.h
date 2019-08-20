@@ -49,20 +49,20 @@
 #define OSD_BAUD 57600
 //########### LCD ##################################################################################################
 //LCD model
-#define LCDLCM1602 // (adress: 0x27 or 0x20) HobbyKing IIC/I2C/TWI Serial 2004 20x4, LCM1602 IIC A0 A1 A2 & YwRobot Arduino LCM1602 IIC V1
+// #define LCDLCM1602 // (adress: 0x27 or 0x20) HobbyKing IIC/I2C/TWI Serial 2004 20x4, LCM1602 IIC A0 A1 A2 & YwRobot Arduino LCM1602 IIC V1
 //#define LCDGYLCD  // (adress: 0x20) Arduino-IIC-LCD GY-LCD-V1Arduino-IIC-LCD GY-LCD-V1
 //#define LCD03I2C  // (adress: 0x63 or  0xc6) LCD03 / LCD05
 //#define GLCDEnable // Graphical LCD - Using system5x7 font so its nearly 20x4 size
-// #define OLEDLCD  // Oled 128x64 i2c LCD (address 0x3C or 0x3D)
+#define OLEDLCD  // Oled 128x64 i2c LCD (address 0x3C or 0x3D)
 
 // I2C LCD Adress
-#define I2CADRESS 0x27 // LCD03/05 have 0x63 or 0xc6 ( even if it's written 0xc6 when powering the lcd03, in fact it uses 0x63 so try booth)
+// #define I2CADRESS 0x27 // LCD03/05 have 0x63 or 0xc6 ( even if it's written 0xc6 when powering the lcd03, in fact it uses 0x63 so try booth)
 // LCM1602 uses 0x27 & GY-LCD use 0x20
 // OLED_LCD use 0x3d or 0x3d
-// #define I2CADRESS 0x3C
+#define I2CADRESS 0x3C
 
 // used for LCD refresh slowdown during tracking, e.g. value 10 means that LCD is refreshed each 10th cycle
-#define LCD_SLOWDOWN_RATE 10
+#define LCD_SLOWDOWN_RATE 25
 //#################################### SERVOS ENDPOINTS #############################################################
 // NO NEED TO EDIT THIS
 //. Those are just default values when not configured.
