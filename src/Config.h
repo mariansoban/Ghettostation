@@ -1,7 +1,7 @@
 /*############################################## CONFIGURATION ####################################################
  # Comment/uncomment/edit according to your needs.
  ##################################################################################################################*/
-#define CONFIG_VERSION 1005 // Changing this will reset eeprom to default values
+#define CONFIG_VERSION 1007 // Changing this will reset eeprom to default values
 
 //########## OPTIONS ###############################################################################################
 
@@ -66,9 +66,9 @@
 // To prevent burning servo they boot starts at neutral for all values. Adjust them directly from the menu.
 
 #define PAN_MAXPWM  2000     //max pan servo pwm value
-#define PAN_MAXANGLE 180     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
+#define PAN_MAXANGLE 360     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
 #define PAN_MINPWM  1000     //min pan servo pwm valuemin pan servo pwm value
-#define PAN_MINANGLE 180      //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
+#define PAN_MINANGLE 0       //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
 
 #define TILT_MAXPWM 1500    //max tilt pwm value
 #define TILT_MAXANGLE 90    //max tilt angle considering 0° is facing toward.
@@ -101,7 +101,7 @@
 #define ULN2003_TILT_IN2 59    // IN2 for tilt servo ---> APM A0 (PF5 ~ 59)
 #define ULN2003_TILT_IN3 60    // IN3 for tilt servo ---> APM A0 (PF6 ~ 60)
 #define ULN2003_TILT_IN4 61    // IN4 for tilt servo ---> APM A0 (PF7 ~ 61)
-#define ULN2003_RPM          7 // RPM of stepper motors
+#define ULN2003_RPM          12 // RPM of stepper motors
 #define ULN2003_PAN_REVERSE  0 // reverse pan stepper motor
 #define ULN2003_TILT_REVERSE 0 // reverse tilt stepper motor
 #endif
