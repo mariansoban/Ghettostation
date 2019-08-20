@@ -942,27 +942,27 @@ void move_stepper(uint8_t servo_type, int angle_degrees) {
             angle_degrees_lim = constrain(angle_degrees, configuration.pan_minangle, configuration.pan_maxangle);
             angle = ULN2003_PAN_REVERSE ? -angle_degrees_lim : angle_degrees_lim;
             stepper_pan.newMoveToDegreeWithinOneRound(angle, true);
-#ifdef DEBUG
-            Serial.print("move_stepper: PAN input angle: ");
-            Serial.print(angle_degrees);
-            Serial.print("\tmoving to angle: ");
-            Serial.print(angle);
-            Serial.print("\t steps left: ");
-            Serial.println(stepper_pan.getStepsLeft());
-#endif
+//#ifdef DEBUG
+//            Serial.print("move_stepper: PAN input angle: ");
+//            Serial.print(angle_degrees);
+//            Serial.print("\tmoving to angle: ");
+//            Serial.print(angle);
+//            Serial.print("\t steps left: ");
+//            Serial.println(stepper_pan.getStepsLeft());
+//#endif
             break;
         case TILT:
             angle_degrees_lim = constrain(angle_degrees, configuration.tilt_minangle, configuration.tilt_maxangle);
             angle = ULN2003_TILT_REVERSE ? -angle_degrees_lim : angle_degrees_lim;
             stepper_tilt.newMoveToDegreeWithinOneRound(angle, true);
-#ifdef DEBUG
-            Serial.print("move_stepper: TILT input angle: ");
-            Serial.print(angle_degrees);
-            Serial.print("\tmoving to angle: ");
-            Serial.print(angle);
-            Serial.print("\t steps left: ");
-            Serial.println(stepper_tilt.getStepsLeft());
-#endif
+//#ifdef DEBUG
+//            Serial.print("move_stepper: TILT input angle: ");
+//            Serial.print(angle_degrees);
+//            Serial.print("\tmoving to angle: ");
+//            Serial.print(angle);
+//            Serial.print("\t steps left: ");
+//            Serial.println(stepper_tilt.getStepsLeft());
+//#endif
             break;
         default:
             break;
@@ -972,12 +972,12 @@ void move_stepper(uint8_t servo_type, int angle_degrees) {
 }
 
 void servoPathfinder(int angle_b, int angle_a) {   // ( bearing, elevation )
-#ifdef DEBUG
-    Serial.print("# servoPathfinder, angle_b (pan): ");
-    Serial.print(angle_b);
-    Serial.print("\tangle_a (tilt): ");
-    Serial.println(angle_a);
-#endif
+//#ifdef DEBUG
+//    Serial.print("# servoPathfinder, angle_b (pan): ");
+//    Serial.print(angle_b);
+//    Serial.print("\tangle_a (tilt): ");
+//    Serial.println(angle_a);
+//#endif
 //find the best way to move pan servo considering 0° reference face toward
     int angle_b_org = angle_b;
     int angle_a_org = angle_a;
