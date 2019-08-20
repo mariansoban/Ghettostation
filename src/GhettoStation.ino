@@ -195,10 +195,17 @@ void setup() {
 void loop() {
     long start_time = millis();
 
+    // move stepper mottors with ULN2003 driver
+#ifdef ULN2003
+    stepper_pan.run();
+    stepper_tilt.run();
+#endif
+
     if (loop5s.check()) {
         //debug output to usb Serial
 #if defined(DEBUG)
-        debug();
+        debug1();
+        // debug2();
 #endif
     }
 
@@ -246,12 +253,6 @@ void loop() {
         }
     }
     get_telemetry();
-
-    // move stepper mottors with ULN2003 driver
-#ifdef ULN2003
-    stepper_pan.run();
-    stepper_tilt.run();
-#endif
 
     // loop time stats
     loop_time_sum += millis() - start_time;
@@ -1175,8 +1176,32 @@ void playTones(uint8_t alertlevel) {
 //######################################## DEBUG #############################################
 
 #if defined(DEBUG)
-void debug() {
-    Serial.println("================================");
+void debug1() {
+    Serial.println("==========debug1================");
+    Serial.print("memory: ");
+    int freememory = freeMem();
+    Serial.print(freememory);
+    Serial.print("   current activity: ");
+    Serial.print(current_activity);
+    Serial.print("   avg. loop time [ms]: ");
+    Serial.print(last_avg_loop_time);
+    Serial.print("   avg. lopp [HZ]: ");
+    if (last_avg_loop_time > 0) {
+        Serial.print(1000 / last_avg_loop_time);
+    } else {
+        Serial.print(0);
+    }
+    Serial.print("   last gframe processed before [ms]: ");
+    if (last_ltm_gframe_time > 0) {
+        Serial.print(millis() - last_ltm_gframe_time);
+    } else {
+        Serial.print("N/A");
+    }
+    Serial.println();
+}
+
+void debug2() {
+    Serial.println("==========debug2================");
     Serial.print("mem ");
     int freememory = freeMem();
     Serial.println(freememory);
