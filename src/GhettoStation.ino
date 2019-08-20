@@ -217,6 +217,7 @@ void loop() {
             last_avg_loop_time = ((float) loop_time_sum) / ((float) loop_time_count);
             loop_time_sum = 0;
             loop_time_count = 0;
+            loop_time_longest = 0;
         }
     }
 
@@ -262,11 +263,16 @@ void loop() {
     }
     get_telemetry();
 
-    // loop time stats
-    loop_time_sum += millis() - start_time;
-    loop_time_count++;
-
     lcd_slowdown_counter++;
+
+    // loop time stats
+    loop_time_count++;
+    unsigned long loop_time = millis() - start_time;
+    if (loop_time_longest < loop_time) {
+        loop_time_longest = loop_time;
+    }
+    loop_time_sum += loop_time;
+
 }
 
 //######################################## ACTIVITIES #####################################################################
@@ -1219,6 +1225,8 @@ void debug1() {
     } else {
         Serial.print(0);
     }
+    Serial.print("\tlongest loop time [ms]: ");
+    Serial.print(loop_time_longest);
     Serial.print("\tlast gframe processed before [ms]: ");
     if (last_ltm_gframe_time > 0) {
         Serial.print(millis() - last_ltm_gframe_time);
