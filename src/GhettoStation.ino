@@ -231,8 +231,16 @@ void loop() {
 #endif
         //current activity loop
         check_activity();
+
         //update lcd screen
-        refresh_lcd();
+        if (current_activity == 1) {
+            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                refresh_lcd();
+            }
+        } else {
+            refresh_lcd();
+        }
+
         switch (buzzer_status) {
         case 1:
             playTones(1);
@@ -257,6 +265,8 @@ void loop() {
     // loop time stats
     loop_time_sum += millis() - start_time;
     loop_time_count++;
+
+    lcd_slowdown_counter++;
 }
 
 //######################################## ACTIVITIES #####################################################################
@@ -282,7 +292,9 @@ void check_activity() {
             current_activity = 2;         // set bearing if not set.
         } else if (home_bear) {
             antenna_tracking();
-            lcddisp_tracking();
+            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                lcddisp_tracking();
+            }
             if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
                 current_activity = 0;
                 //telemetry_off();

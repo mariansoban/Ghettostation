@@ -96,6 +96,9 @@ unsigned int loop_time_count = 0;
 float last_avg_loop_time = 0;
 unsigned long last_ltm_gframe_time = 0;
 
+// used for LCD refresh slowdown during tracking
+unsigned long lcd_slowdown_counter = 0;
+
 
 /*##################################### STRINGS STORED IN FLASH #############################################*/
 

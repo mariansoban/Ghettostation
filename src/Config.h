@@ -60,6 +60,9 @@
 // LCM1602 uses 0x27 & GY-LCD use 0x20
 // OLED_LCD use 0x3d or 0x3d
 // #define I2CADRESS 0x3C
+
+// used for LCD refresh slowdown during tracking, e.g. value 10 means that LCD is refreshed each 10th cycle
+#define LCD_SLOWDOWN_RATE 10
 //#################################### SERVOS ENDPOINTS #############################################################
 // NO NEED TO EDIT THIS
 //. Those are just default values when not configured.
