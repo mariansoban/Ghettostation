@@ -236,7 +236,12 @@ void loop() {
         //update lcd screen
         if (current_activity == 1) {
             if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                unsigned long start = micros();
+                // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
                 refresh_lcd();
+                Serial.print("#### refresh_lcd: ");
+                Serial.print(micros() - start);
+                Serial.println(" micros");
             }
         } else {
             refresh_lcd();
@@ -299,7 +304,12 @@ void check_activity() {
         } else if (home_bear) {
             antenna_tracking();
             if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                unsigned long start = micros();
+                // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD!
                 lcddisp_tracking();
+                Serial.print("#### lcddisp_tracking: ");
+                Serial.print(micros() - start);
+                Serial.println(" micros");
             }
             if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
                 current_activity = 0;
