@@ -920,13 +920,14 @@ void get_telemetry() {
             }
             if ((currentMillis - previous_millis_high) >= 200) // 20 Hz (Executed every 50ms)
                     {
+                uint8_t MSPcmdsend;
                 if (queuedMSPRequests == 0)
                     queuedMSPRequests = modeMSPRequests;
                 uint32_t req = queuedMSPRequests & -queuedMSPRequests;
                 queuedMSPRequests &= ~req;
                 switch (req) {
                 case REQ_MSP_IDENT:
-                    MSPcmdsend = MSP_IDENT;
+                    // MSPcmdsend = MSP_IDENT;
                     break;
                 case REQ_MSP_STATUS:
                     MSPcmdsend = MSP_STATUS;
