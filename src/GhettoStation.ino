@@ -211,7 +211,7 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             if (stepper_pan.isTurnedOff() == false && start_time_micros > stepper_pan.getRealLastStepTimeMicros()
                     && start_time_micros - stepper_pan.getRealLastStepTimeMicros() > ((unsigned long) ULN2003_AUTO_OFF_MS) * 1000) {
 #ifdef DEBUG
-                Serial.println("### turning of PAN stepper due to inactivity");
+                Serial.println("### turning off PAN stepper due to inactivity");
 #endif
                 // turn off PAN stepper
                 stepper_pan.off();
@@ -219,7 +219,7 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             if (stepper_tilt.isTurnedOff() == false && start_time_micros > stepper_tilt.getRealLastStepTimeMicros()
                     && start_time_micros - stepper_tilt.getRealLastStepTimeMicros() > ((unsigned long) ULN2003_AUTO_OFF_MS) * 1000) {
 #ifdef DEBUG
-                Serial.println("### turning of TILT stepper due to inactivity");
+                Serial.println("### turning off TILT stepper due to inactivity");
 #endif
                 // turn off TILT stepper
                 stepper_tilt.off();

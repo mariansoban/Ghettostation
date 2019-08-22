@@ -110,9 +110,9 @@ private:
 		return calcRpm(delay); // calcs rpm from current delay
 	}
 
-	void seqCW();
-	void seqCCW();
-	void seq(int seqNum); // send specific sequence num to driver
+	void seqCW(bool waitDelay);
+	void seqCCW(bool waitDelay);
+	void seq(int seqNum, bool waitDelay); // send specific sequence num to driver
 
 	int pins[4]; // defaults to pins {8,9,10,11} (in1,in2,in3,in4 on the driver board)
 
@@ -120,7 +120,7 @@ private:
 	// 0-4095 (4096 mini-steps / revolution) or maybe 4076...
 	int totalSteps = 4096;
 
-	int delay = 900; // microsecond delay between steps
+	unsigned int delay = 900; // microsecond delay between steps
 	// 900 ~= 16.25 rpm
 	// low speed (high torque) = 1465 ~= 10 rpm
 	// high speed (low torque) = 600 ~=  24 rpm

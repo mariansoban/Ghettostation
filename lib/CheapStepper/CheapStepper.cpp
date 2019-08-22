@@ -186,10 +186,12 @@ void CheapStepper::run(){
 
 	if (micros() - lastStepTime >= delay) { // if time for step
 		if (stepsLeft > 0) { // clockwise
-			stepCW();
+			// stepCW();
+		    seqCW(false);
 			stepsLeft--;
 		} else if (stepsLeft < 0){ // counter-clockwise
-			stepCCW();
+			// stepCCW();
+		    seqCCW(false);
 			stepsLeft++;
 		} 
 
@@ -203,12 +205,12 @@ void CheapStepper::stop(){
 }
 
 
-void CheapStepper::step(bool clockwise){
+void CheapStepper::step(bool clockwise) {
 
 	if (clockwise) {
-	    seqCW();
+	    seqCW(true);
 	} else {
-	    seqCCW();
+	    seqCCW(true);
 	}
 }
 
@@ -242,10 +244,10 @@ int CheapStepper::calcRpm (int _delay){
 	
 }
 
-void CheapStepper::seqCW (){
+void CheapStepper::seqCW (bool waitDelay){
 	seqN++;
 	if (seqN > 7) seqN = 0; // roll over to A seq
-	seq(seqN);
+	seq(seqN, waitDelay);
 
 	stepN++; // track miniSteps
 	if (stepN >= totalSteps){
@@ -253,10 +255,10 @@ void CheapStepper::seqCW (){
 	}
 }
 
-void CheapStepper::seqCCW (){
+void CheapStepper::seqCCW (bool waitDelay){
 	seqN--;
 	if (seqN < 0) seqN = 7; // roll over to DA seq
-	seq(seqN);
+	seq(seqN, waitDelay);
 
 	stepN--; // track miniSteps
 	if (stepN < 0){
@@ -264,7 +266,7 @@ void CheapStepper::seqCCW (){
 	}
 }
 
-void CheapStepper::seq (int seqNum){
+void CheapStepper::seq (int seqNum, bool waitDelay){
     turnedOff = false;
     realLastStepTime = micros();
 	int pattern[4];
@@ -349,7 +351,10 @@ void CheapStepper::seq (int seqNum){
 	for (int p=0; p<4; p++){
 		digitalWrite(pins[p], pattern[p]);
 	}
-	delayMicroseconds(delay); // XXX [ms] bad - stops main loop for delay time...
+
+	if (waitDelay) {
+	    delayMicroseconds(delay); // stops main loop for delay time...
+	}
 }
 
 
