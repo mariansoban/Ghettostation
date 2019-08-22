@@ -516,19 +516,15 @@ void lcddisp_bearing_method() {
         case 3:
             switch (configuration.bearing_method) {
             case 1:
-                //currentline = "MSP"; break;
                 string_bearing1.copy(currentline);
                 break;
             case 2:
-                //currentline = "LTM"; break;
                 string_bearing2.copy(currentline);
                 break;
             case 3:
-                //currentline = "MavLink"; break;
                 string_bearing3.copy(currentline);
                 break;
             case 4:
-                //currentline = "NMEA"; break;
                 string_bearing4.copy(currentline);
                 break;
             }
