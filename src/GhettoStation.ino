@@ -358,9 +358,11 @@ void check_activity() {
     case 4:             //PAN_MINANGLE
         configuration.pan_minangle = config_servo(1, 2, configuration.pan_minangle);
         move_servo(PAN, configuration.pan_minpwm);
+        move_stepper(PAN, configuration.pan_minpwm);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
             move_servo(PAN, 0, configuration.pan_minangle, configuration.pan_maxangle);
+            move_stepper(PAN, 0);
             current_activity = 0;
         }
         break;
@@ -385,9 +387,11 @@ void check_activity() {
     case 6:             //PAN_MAXANGLE
         configuration.pan_maxangle = config_servo(1, 4, configuration.pan_maxangle);
         move_servo(PAN, configuration.pan_maxpwm);
+        move_stepper(PAN, configuration.pan_maxpwm);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
             move_servo(PAN, 0, configuration.pan_minangle, configuration.pan_maxangle);
+            move_stepper(PAN, 0);
             current_activity = 0;
         }
         break;
@@ -411,9 +415,11 @@ void check_activity() {
     case 8:             //TILT_MINANGLE
         configuration.tilt_minangle = config_servo(2, 2, configuration.tilt_minangle);
         move_servo(TILT, configuration.tilt_minpwm);
+        move_stepper(TILT, configuration.tilt_minpwm);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
             move_servo(TILT, 0, configuration.tilt_minangle, configuration.tilt_maxangle);
+            move_stepper(TILT, 0);
             current_activity = 0;
         }
         break;
@@ -437,9 +443,11 @@ void check_activity() {
     case 10:                //TILT_MAXANGLE
         configuration.tilt_maxangle = config_servo(2, 4, configuration.tilt_maxangle);
         move_servo(TILT, configuration.tilt_maxpwm);
+        move_stepper(TILT, configuration.tilt_maxpwm);
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             EEPROM_write(config_bank[int(current_bank)], configuration);
             move_servo(TILT, 0, configuration.tilt_minangle, configuration.tilt_maxangle);
+            move_stepper(TILT, 0);
             current_activity = 0;
         }
         break;
