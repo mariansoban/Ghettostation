@@ -262,7 +262,7 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             //update lcd screen
             if (!ignore_lcd) {
                 if (current_activity == 1 || current_activity == 18) { // tracking or init steppers position
-                    if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
+                    if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
                         // unsigned long start = micros();
                         // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD, if delay call for OLED is not fixed!
                         refresh_lcd();
@@ -331,7 +331,7 @@ void check_activity() {
             current_activity = 2;         // set bearing if not set.
         } else if (home_bear) {
             antenna_tracking();
-            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
+            if (lcd_slowdown_counter % (LCD_SLOWDOWN_RATE / 2) == 0) {
                 // unsigned long start = micros();
                 // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
                 lcddisp_tracking();
@@ -553,7 +553,7 @@ void check_activity() {
 
         if (stepper_pan.getStepsLeft() != 0 && stepper_tilt.getStepsLeft() != 0) {
             // steppers are still moving to their zero positions
-            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
+            if (lcd_slowdown_counter  % (LCD_SLOWDOWN_RATE / 2) == 0) {
                 lcddisp_init_steppers_wait();
             }
         } else {
@@ -561,7 +561,7 @@ void check_activity() {
             // 2)
             stepper_pan.off();
             stepper_tilt.off();
-            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
+            if (lcd_slowdown_counter % (LCD_SLOWDOWN_RATE / 2) == 0) {
                 lcddisp_init_steppers();
             }
         }
