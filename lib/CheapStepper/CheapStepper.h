@@ -99,6 +99,8 @@ public:
 	}
 	int getStepsLeft() { return stepsLeft; } // returns steps left in current move
 
+	unsigned long getLastStepTimeMicros() { return lastStepTime; }
+
 private:
 
 	int calcDelay(int rpm); // calcs microsecond step delay for given rpm

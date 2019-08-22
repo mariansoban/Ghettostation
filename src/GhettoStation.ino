@@ -199,12 +199,26 @@ void loop() {
 static void smartDelay(unsigned long ms, bool ignore_lcd) {
     unsigned long start = millis();
     do {
-        long start_time = millis();
+        unsigned long start_time = millis();
+        unsigned long start_time_micros = micros();
 
         // move stepper mottors with ULN2003 driver
 #ifdef ULN2003
         stepper_pan.run();
         stepper_tilt.run();
+        if (ULN2003_AUTO_OFF_MS > 0) {
+            // check steppers inactivity time - if they are inactive for too long, turn them off
+            if (start_time_micros
+                    > stepper_pan.getLastStepTimeMicros() && start_time_micros - stepper_pan.getLastStepTimeMicros() > ULN2003_AUTO_OFF_MS) {
+                // turn off PAN stepper
+                stepper_pan.off();
+            }
+            if (start_time_micros
+                    > stepper_tilt.getLastStepTimeMicros() && start_time_micros - stepper_tilt.getLastStepTimeMicros() > ULN2003_AUTO_OFF_MS) {
+                // turn off TILT stepper
+                stepper_tilt.off();
+            }
+        }
 #endif
 
         if (loop5s.check()) {

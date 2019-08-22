@@ -343,7 +343,7 @@ void CheapStepper::seq (int seqNum){
 	for (int p=0; p<4; p++){
 		digitalWrite(pins[p], pattern[p]);
 	}
-	delayMicroseconds(delay);
+	delayMicroseconds(delay); // XXX [ms] bad - stops main loop for delay time...
 }
 
 
