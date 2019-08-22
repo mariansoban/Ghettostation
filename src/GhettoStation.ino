@@ -208,13 +208,19 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
         stepper_tilt.run();
         if (ULN2003_AUTO_OFF_MS > 0) {
             // check steppers inactivity time - if they are inactive for too long, turn them off
-            if (start_time_micros
-                    > stepper_pan.getLastStepTimeMicros() && start_time_micros - stepper_pan.getLastStepTimeMicros() > ULN2003_AUTO_OFF_MS) {
+            if (stepper_pan.isTurnedOff() == false && start_time_micros > stepper_pan.getRealLastStepTimeMicros()
+                    && start_time_micros - stepper_pan.getRealLastStepTimeMicros() > ((unsigned long) ULN2003_AUTO_OFF_MS) * 1000) {
+#ifdef DEBUG
+                Serial.println("### turning of PAN stepper due to inactivity");
+#endif
                 // turn off PAN stepper
                 stepper_pan.off();
             }
-            if (start_time_micros
-                    > stepper_tilt.getLastStepTimeMicros() && start_time_micros - stepper_tilt.getLastStepTimeMicros() > ULN2003_AUTO_OFF_MS) {
+            if (stepper_tilt.isTurnedOff() == false && start_time_micros > stepper_tilt.getRealLastStepTimeMicros()
+                    && start_time_micros - stepper_tilt.getRealLastStepTimeMicros() > ((unsigned long) ULN2003_AUTO_OFF_MS) * 1000) {
+#ifdef DEBUG
+                Serial.println("### turning of TILT stepper due to inactivity");
+#endif
                 // turn off TILT stepper
                 stepper_tilt.off();
             }
@@ -256,7 +262,7 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             //update lcd screen
             if (!ignore_lcd) {
                 if (current_activity == 1 || current_activity == 18) { // tracking or init steppers position
-                    if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                    if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
                         // unsigned long start = micros();
                         // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD, if delay call for OLED is not fixed!
                         refresh_lcd();
@@ -325,7 +331,7 @@ void check_activity() {
             current_activity = 2;         // set bearing if not set.
         } else if (home_bear) {
             antenna_tracking();
-            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
                 // unsigned long start = micros();
                 // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
                 lcddisp_tracking();
@@ -540,11 +546,14 @@ void check_activity() {
             // 1)
             stepper_pan.newMoveToWithinOneRound(0, true);
             stepper_tilt.newMoveToWithinOneRound(0, true);
+#ifdef DEBUG
+                Serial.println("### moving stepper motors to zero positions for later manual centering");
+#endif
         }
 
         if (stepper_pan.getStepsLeft() != 0 && stepper_tilt.getStepsLeft() != 0) {
             // steppers are still moving to their zero positions
-            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
                 lcddisp_init_steppers_wait();
             }
         } else {
@@ -552,7 +561,7 @@ void check_activity() {
             // 2)
             stepper_pan.off();
             stepper_tilt.off();
-            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+            if ((lcd_slowdown_counter + 1) % LCD_SLOWDOWN_RATE == 0) {
                 lcddisp_init_steppers();
             }
         }
@@ -561,9 +570,9 @@ void check_activity() {
 #ifdef ULN2003
             // restore steppers to previous steps when initial positions are set
 #ifdef DEBUG
-            Serial.print("Restoring positions - PAN stepper to stepN: ");
+            Serial.print("### restoring stepper positions - PAN to: ");
             Serial.print(stepper_pan_step_n);
-            Serial.print("\tTILT stepper to stepN: ");
+            Serial.print("\tTILT to: ");
             Serial.println(stepper_tilt_step_n);
 #endif
             // restore steppers position

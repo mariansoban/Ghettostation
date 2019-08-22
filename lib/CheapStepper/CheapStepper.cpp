@@ -205,13 +205,18 @@ void CheapStepper::stop(){
 
 void CheapStepper::step(bool clockwise){
 
-	if (clockwise) seqCW();
-	else seqCCW();
+	if (clockwise) {
+	    seqCW();
+	} else {
+	    seqCCW();
+	}
 }
 
 void CheapStepper::off() {
-	for (int p=0; p<4; p++)
+	for (int p=0; p<4; p++) {
 		digitalWrite(pins[p], 0);
+	}
+	turnedOff = true;
 }
 
 
@@ -260,7 +265,8 @@ void CheapStepper::seqCCW (){
 }
 
 void CheapStepper::seq (int seqNum){
-
+    turnedOff = false;
+    realLastStepTime = micros();
 	int pattern[4];
 	// A,B,C,D HIGH/LOW pattern to write to driver board
 	

@@ -160,9 +160,9 @@ FLASH_STRING(string_bearing2, "2: Manual           ");
 FLASH_STRING(string_bearing3, "3: FC Compass       ");
 FLASH_STRING(string_bearing4, "4: GS Compass       ");
 FLASH_STRING(string_voltage0, "ADJUST VOLTAGE RATIO");
-FLASH_STRING(string_init_stepper1, "MOVE BOTH PAN");
-FLASH_STRING(string_init_stepper2, "ANT TILT STEPPERS");
-FLASH_STRING(string_init_stepper3, "TO INITIAL POSITION");
+FLASH_STRING(string_init_stepper1, "   MOVE BOTH PAN    ");
+FLASH_STRING(string_init_stepper2, " AND TILT STEPPERS  ");
+FLASH_STRING(string_init_stepper3, "TO INITIAL POSITION ");
 FLASH_STRING(string_init_stepper_wait1, "     ...WAIT...     ");
 /*########################################### MENU ##################################################*/
 MenuSystem displaymenu;

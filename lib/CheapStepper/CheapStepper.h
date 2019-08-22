@@ -99,7 +99,8 @@ public:
 	}
 	int getStepsLeft() { return stepsLeft; } // returns steps left in current move
 
-	unsigned long getLastStepTimeMicros() { return lastStepTime; }
+	unsigned long getRealLastStepTimeMicros() { return realLastStepTime; }
+	bool isTurnedOff() { return turnedOff; }
 
 private:
 
@@ -128,7 +129,9 @@ private:
 
 	// variables for non-blocking moves:
 	unsigned long lastStepTime; // time in microseconds that last step happened
+	unsigned long realLastStepTime; // time in microseconds that last step happened (with real movement change)
 	int stepsLeft = 0; // steps left to move, neg for counter-clockwise
+	bool turnedOff = true; // flag if stepper is turned off
 
 };
 

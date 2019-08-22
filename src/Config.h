@@ -62,7 +62,7 @@
 #define I2CADRESS 0x3C
 
 // used for LCD refresh slowdown during tracking, e.g. value 10 means that LCD is refreshed each 10th cycle
-#define LCD_SLOWDOWN_RATE 25
+#define LCD_SLOWDOWN_RATE 20
 //#################################### SERVOS ENDPOINTS #############################################################
 // NO NEED TO EDIT THIS
 //. Those are just default values when not configured.
@@ -105,7 +105,7 @@
 #define ULN2003_TILT_IN3 60    // IN3 for tilt servo ---> APM A0 (PF6 ~ 60)
 #define ULN2003_TILT_IN4 61    // IN4 for tilt servo ---> APM A0 (PF7 ~ 61)
 #define ULN2003_RPM          15// RPM of stepper motors
-#define ULN2003_AUTO_OFF_MS  5000 // if positive, turns off given stepper after inactivity time to protect overheating; disabled if 0 or negative
+#define ULN2003_AUTO_OFF_MS  15000 // if positive, turns off given stepper after inactivity time to protect overheating; disabled if 0 or negative
 #define ULN2003_PAN_REVERSE  0 // reverse pan stepper motor
 #define ULN2003_TILT_REVERSE 0 // reverse tilt stepper motor
 #endif
