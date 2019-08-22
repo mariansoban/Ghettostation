@@ -907,7 +907,6 @@ void get_telemetry() {
         if (!PASSIVEMODE) {
             static unsigned long previous_millis_low = 0;
             static unsigned long previous_millis_high = 0;
-            static unsigned long previous_millis_onsec = 0;
             static uint8_t queuedMSPRequests = 0;
             unsigned long currentMillis = millis();
             if ((currentMillis - previous_millis_low) >= 1000) // 1hz
@@ -921,7 +920,6 @@ void get_telemetry() {
             }
             if ((currentMillis - previous_millis_high) >= 200) // 20 Hz (Executed every 50ms)
                     {
-                uint8_t MSPcmdsend;
                 if (queuedMSPRequests == 0)
                     queuedMSPRequests = modeMSPRequests;
                 uint32_t req = queuedMSPRequests & -queuedMSPRequests;
@@ -1206,7 +1204,8 @@ int16_t calc_bearing(int32_t lon1, int32_t lat1, int32_t lon2, int32_t lat2) {
 
 int16_t calc_elevation(int32_t alt) {
     float at = atan2(alt, home_dist);
-    at = at * 57, 2957795;
+    // at = at * 57, 2957795;
+    at = at * 57.2957795;
     int16_t e = (int16_t) round(at);
     return e;
 }
@@ -1221,7 +1220,7 @@ void calc_longitude_scaling(int32_t lat) {
 #if defined(COMPASS)
 void retrieve_mag() {
 // Retrieve the raw values from the compass (not scaled).
-    MagnetometerRaw raw = compass.ReadRawAxis();
+    // MagnetometerRaw raw = compass.ReadRawAxis();
 // Retrieved the scaled values from the compass (scaled to the configured scale).
     MagnetometerScaled scaled = compass.ReadScaledAxis();
 //

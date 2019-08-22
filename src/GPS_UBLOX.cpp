@@ -270,7 +270,7 @@ void gps_ublox_read() {
 																								uav_fix_type = 3; // 3D fix
 																}
 																else
-																								uav_fix_type == 1; // no fix
+																								uav_fix_type = 1; // no fix
 																uav_lat = GPS_UBLOX.Lattitude;
 																uav_lon = GPS_UBLOX.Longitude;
 																uav_alt = GPS_UBLOX.Altitude; //in cm

@@ -266,7 +266,7 @@ void gps_nmea_read() {
 																								uav_fix_type = 3; // 3D fix
 																}
 																else
-																								uav_fix_type == 1; // no fix
+																								uav_fix_type = 1; // no fix
 																uav_lat = GPS_NMEA.Lattitude;
 																uav_lon = GPS_NMEA.Longitude;
 																uav_alt = round(GPS_NMEA.Altitude / 10.0f); //from mm to cm

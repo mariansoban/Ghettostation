@@ -229,7 +229,6 @@ void lcddisp_setbearing() {
     }
     for (int i = 1; i < 5; i++) {
         char currentline[21] = "";
-        char extract[21];
         switch (i) {
         case 1:
             if (!telemetry_ok) {
@@ -566,7 +565,6 @@ void lcddisp_voltage_ratio() {
             sprintf(currentline, "Voltage: %s V", dtostrf(voltage_actual, 4, 2, bufferV));
             break;
         case 3:
-            char bufferX[5];
             sprintf(currentline, "Ratio:  %s ", dtostrf(voltage_ratio, 3, 2, bufferV));
             break;
         case 4:
@@ -583,7 +581,6 @@ void lcddisp_voltage_ratio() {
 void lcddisp_testservo() {
     for (int i = 1; i < 5; i++) {
         char currentline[21] = "";
-        char extract[21];
         switch (i) {
         case 1:
             string_servos3.copy(currentline);
@@ -666,7 +663,6 @@ int config_servo(int servotype, int valuetype, int value) {
         delay(500);
     }
     char currentline[21];
-    char extract[21];
     if (servotype == 1) {
         string_servos1.copy(currentline);                      // Pan servo
         store_lcdline(1, currentline);
