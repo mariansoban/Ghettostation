@@ -605,6 +605,54 @@ void lcddisp_testservo() {
     }
 }
 
+void lcddisp_init_steppers() {
+    for (int i = 1; i < 5; i++) {
+        char currentline[21] = "";
+        switch (i) {
+        case 1:
+            string_init_stepper1.copy(currentline);
+            break;
+        case 2:
+            string_init_stepper2.copy(currentline);
+            break;
+        case 3:
+            string_init_stepper3.copy(currentline);
+            break;
+        case 4:
+            string_shome5.copy(currentline);
+            break;
+        }
+        for (int l = strlen(currentline); l < 20; l++) {
+            strcat(currentline, " ");
+        }
+        store_lcdline(i, currentline);
+    }
+}
+
+void lcddisp_init_steppers_wait() {
+    for (int i = 1; i < 5; i++) {
+        char currentline[21] = "";
+        switch (i) {
+        case 1:
+            string_init_stepper_wait1.copy(currentline);
+            break;
+        case 2:
+            string_init_stepper_wait1.copy(currentline);
+            break;
+        case 3:
+            string_init_stepper_wait1.copy(currentline);
+            break;
+        case 4:
+            string_shome5.copy(currentline);
+            break;
+        }
+        for (int l = strlen(currentline); l < 20; l++) {
+            strcat(currentline, " ");
+        }
+        store_lcdline(i, currentline);
+    }
+}
+
 // SERVO CONFIGURATION
 
 int config_servo(int servotype, int valuetype, int value) {

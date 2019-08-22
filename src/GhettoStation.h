@@ -100,6 +100,11 @@ unsigned long last_ltm_gframe_time = 0;
 // used for LCD refresh slowdown during tracking
 unsigned long lcd_slowdown_counter = 0;
 
+bool steppers_returning_to_zero_started = false;
+int stepper_pan_step_n = 0;
+int stepper_tilt_step_n = 0;
+
+
 
 /*##################################### STRINGS STORED IN FLASH #############################################*/
 
@@ -153,6 +158,10 @@ FLASH_STRING(string_bearing2, "2: Manual           ");
 FLASH_STRING(string_bearing3, "3: FC Compass       ");
 FLASH_STRING(string_bearing4, "4: GS Compass       ");
 FLASH_STRING(string_voltage0, "ADJUST VOLTAGE RATIO");
+FLASH_STRING(string_init_stepper1, "MOVE BOTH PAN");
+FLASH_STRING(string_init_stepper2, "ANT TILT STEPPERS");
+FLASH_STRING(string_init_stepper3, "TO INITIAL POSITION");
+FLASH_STRING(string_init_stepper_wait1, "     ...WAIT...     ");
 /*########################################### MENU ##################################################*/
 MenuSystem displaymenu;
 Menu rootMenu("");
@@ -179,6 +188,7 @@ MenuItem m1m3m3i1Item("OSD");
 MenuItem m1m3m3i2Item("BEARING METHOD");
 MenuItem m1m3m3i3Item("BATTERY ALERT");
 MenuItem m1i4Item("SWITCH SETTINGS");
+MenuItem m1i5Item("INIT STEPPER POS.");
 
 /*##################################### COMMON FUNCTIONS #############################################*/
 

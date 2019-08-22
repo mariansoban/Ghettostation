@@ -241,10 +241,10 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
 
             //update lcd screen
             if (!ignore_lcd) {
-                if (current_activity == 1) {
+                if (current_activity == 1 || current_activity == 18) { // tracking or init steppers position
                     if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
                         // unsigned long start = micros();
-                        // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
+                        // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD, if delay call for OLED is not fixed!
                         refresh_lcd();
                         // Serial.print("#### refresh_lcd: ");
                         // Serial.print(micros() - start);
@@ -313,7 +313,7 @@ void check_activity() {
             antenna_tracking();
             if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
                 // unsigned long start = micros();
-                // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD!
+                // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
                 lcddisp_tracking();
                 // Serial.print("#### lcddisp_tracking: ");
                 // Serial.print(micros() - start);
@@ -500,6 +500,61 @@ void check_activity() {
         if (enter_button.holdTime() >= 700 && enter_button.held()) { //long press
             configuration.voltage_ratio = (uint16_t) (voltage_ratio * 100.0f);
             EEPROM_write(config_bank[int(current_bank)], configuration);
+            current_activity = 0;
+        }
+        break;
+    case 18:                // set steppers to initial positions
+        // 0) remember old values for stepN for both steppers
+        // 1) move steppers to ZERO positions, show WAIT message
+        // 2) when they are both at ZERO, turn off steppers and show user that he can center steppers now
+        // 3) when user exits centering process, move steppers to old stepN values from 1)
+
+#ifdef ULN2003
+        if (steppers_returning_to_zero_started == false) {
+            steppers_returning_to_zero_started = true;
+            // 0)
+            stepper_pan_step_n = stepper_pan.getStep(); // remember stepN
+            stepper_tilt_step_n = stepper_tilt.getStep(); // remember stepN
+            // 1)
+            stepper_pan.newMoveToWithinOneRound(0, true);
+            stepper_tilt.newMoveToWithinOneRound(0, true);
+        }
+
+        if (stepper_pan.getStepsLeft() != 0 && stepper_tilt.getStepsLeft() != 0) {
+            // steppers are still moving to their zero positions
+            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                lcddisp_init_steppers_wait();
+            }
+        } else {
+            // steppers are at zero postions now - user can move steppers manually
+            // 2)
+            stepper_pan.off();
+            stepper_tilt.off();
+            if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
+                lcddisp_init_steppers();
+            }
+        }
+#endif
+        if (enter_button.holdTime() >= 700 && enter_button.held()) { // long press
+#ifdef ULN2003
+            // restore steppers to previous steps when initial positions are set
+#ifdef DEBUG
+            Serial.print("Restoring positions - PAN stepper to stepN: ");
+            Serial.print(stepper_pan_step_n);
+            Serial.print("\tTILT stepper to stepN: ");
+            Serial.println(stepper_tilt_step_n);
+#endif
+            // restore steppers position
+            if (stepper_pan_step_n != 0) {
+                stepper_pan.newMoveToWithinOneRound(stepper_pan_step_n, true);
+                stepper_pan_step_n = 0;
+            }
+            if (stepper_tilt_step_n != 0) {
+                stepper_tilt.newMoveToWithinOneRound(stepper_tilt_step_n, true);
+                stepper_tilt_step_n = 0;
+            }
+            steppers_returning_to_zero_started = false;
+#endif
             current_activity = 0;
         }
         break;
@@ -715,6 +770,9 @@ void rightButtonReleaseEvents(Button &btn) {
 void init_menu() {
     rootMenu.add_item(&m1i1Item, &screen_tracking); //start track
     rootMenu.add_item(&m1i2Item, &screen_sethome); //set home position
+#ifdef ULN2003
+    rootMenu.add_item(&m1i5Item, &init_stepper_positions); // init stepper positions
+#endif
     rootMenu.add_menu(&m1m3Menu); //configure
     m1m3Menu.add_menu(&m1m3m1Menu); //config servos
     m1m3m1Menu.add_menu(&m1m3m1m1Menu);     //config pan
@@ -811,6 +869,10 @@ void configure_bearing_method(MenuItem *p_menu_item) {
 
 void configure_voltage_ratio(MenuItem *p_menu_item) {
     current_activity = 17;
+}
+
+void init_stepper_positions(MenuItem *p_menu_item) {
+    current_activity = 18;
 }
 
 //######################################## TELEMETRY FUNCTIONS #############################################

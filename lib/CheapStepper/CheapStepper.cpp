@@ -141,7 +141,8 @@ void CheapStepper::newMoveToWithinOneRound(int toStep, bool isInitPosInHalfMove)
         // stepN == toStep - no need to move
     }
 
-    lastStepTime = micros();
+    // XXX movement optimization
+    // lastStepTime = micros();
 }
 
 void CheapStepper::newMoveDegrees (bool clockwise, int deg){
