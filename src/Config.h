@@ -1,7 +1,7 @@
 /*############################################## CONFIGURATION ####################################################
  # Comment/uncomment/edit according to your needs.
  ##################################################################################################################*/
-#define CONFIG_VERSION 1007 // Changing this will reset eeprom to default values
+#define CONFIG_VERSION 1009 // Changing this will reset eeprom to default values
 
 //########## OPTIONS ###############################################################################################
 
@@ -31,8 +31,8 @@
 #define DEFAULTELEVATION  15
 
 //Memory bank name to display on LCD (18 char max)
-#define BANK1  "1.2 GHZ"
-#define BANK2  "5.8 Ghz"
+#define BANK1  "5.8 GHZ"
+#define BANK2  "1.2 Ghz"
 #define BANK3  "Bank 3"
 #define BANK4  "Bank 4"
 
@@ -70,7 +70,7 @@
 // To prevent burning servo they boot starts at neutral for all values. Adjust them directly from the menu.
 
 #define PAN_MAXPWM  2000     //max pan servo pwm value
-#define PAN_MAXANGLE 360     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
+#define PAN_MAXANGLE 359     //Max angle clockwise (on the right) relative to PAN_MAXPWM.
 #define PAN_MINPWM  1000     //min pan servo pwm valuemin pan servo pwm value
 #define PAN_MINANGLE 0       //Max angle counter clockwise (on the left) relative to PAN_MINPWM.
 
