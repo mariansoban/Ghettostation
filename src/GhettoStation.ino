@@ -1301,7 +1301,7 @@ void retrieve_mag() {
 // Once you have your heading, you must then add your ‘Declination Angle’, which is the ‘Error’ of the magnetic field in your location.
 // Find yours here: http://www.magnetic-declination.com/
 
-    float declinationAngle = MAGDEC / 1000;
+    float declinationAngle = ((float) MAGDEC) / 1000;
     heading += declinationAngle;
 
     // Correct for when signs are reversed.
