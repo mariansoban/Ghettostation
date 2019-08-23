@@ -100,6 +100,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 //##### LOOP RATES
 Metro loop5s = Metro(5000); // 5s loop
 Metro loop1hz = Metro(1000); // 1hz loop
+Metro loop5hz = Metro(200); //5hz loop
 Metro loop10hz = Metro(100); //10hz loop
 Metro loop50hz = Metro(20); // 50hz loop
 //##### BUTTONS
@@ -201,6 +202,9 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
     do {
         unsigned long start_time = millis();
         unsigned long start_time_micros = micros();
+        bool refresh_lcd_flag = false;
+
+        get_telemetry();
 
         // move stepper mottors with ULN2003 driver
 #ifdef ULN2003
@@ -226,6 +230,12 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             }
         }
 #endif
+        if (!ignore_lcd && (current_activity == 1 || current_activity == 18)) {
+            // when tracking or setting stepper positions - slow down lcd refresh rate (as it takes too much time)
+            if (start_time - last_lcd_refresh_ms > LCD_SLOWDOWN_REFRESH_PERIOD_MS) {
+                refresh_lcd_flag = true;
+            }
+        }
 
         if (loop5s.check()) {
             //debug output to usb Serial
@@ -259,22 +269,6 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             //current activity loop
             check_activity();
 
-            //update lcd screen
-            if (!ignore_lcd) {
-                if (current_activity == 1 || current_activity == 18) { // tracking or init steppers position
-                    if (lcd_slowdown_counter % LCD_SLOWDOWN_RATE == 0) {
-                        // unsigned long start = micros();
-                        // XXX NOTE: call takes about 80ms for LCDLCM1602, 173ms for OLEDLCD, if delay call for OLED is not fixed!
-                        refresh_lcd();
-                        // Serial.print("#### refresh_lcd: ");
-                        // Serial.print(micros() - start);
-                        // Serial.println(" micros");
-                    }
-                } else {
-                    refresh_lcd();
-                }
-            }
-
             switch (buzzer_status) {
             case 1:
                 playTones(1);
@@ -286,6 +280,14 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
                 break;
             }
         }
+
+        if (loop5hz.check()) {
+            if (!ignore_lcd && current_activity != 1 && current_activity != 18) {
+                // no tracking, no setting of steppers to init pos. --> refresh LCD at 5Hz
+                refresh_lcd_flag = true;
+            }
+        }
+
         if (loop50hz.check() == 1) {
             //update servos
             if (current_activity == 1) {
@@ -294,9 +296,17 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
                 }
             }
         }
-        get_telemetry();
 
-        lcd_slowdown_counter++;
+        // update LCD screen if required
+        if (refresh_lcd_flag) {
+            // Serial.print("<<<<< ");
+            // Serial.print(millis());
+            // Serial.println(" refresh_lcd()");
+            refresh_lcd();
+            last_lcd_refresh_ms = millis();
+        }
+
+        lcd_data_slowdown_counter++;
 
         // loop time stats
         loop_time_count++;
@@ -331,9 +341,12 @@ void check_activity() {
             current_activity = 2;         // set bearing if not set.
         } else if (home_bear) {
             antenna_tracking();
-            if (lcd_slowdown_counter % (LCD_SLOWDOWN_RATE / 2) == 0) {
+            if (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0) {
                 // unsigned long start = micros();
                 // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
+                // Serial.print(">>>>> ");
+                // Serial.print(millis());
+                // Serial.println(" lcddisp_tracking()");
                 lcddisp_tracking();
                 // Serial.print("#### lcddisp_tracking: ");
                 // Serial.print(micros() - start);
@@ -553,7 +566,10 @@ void check_activity() {
 
         if (stepper_pan.getStepsLeft() != 0 && stepper_tilt.getStepsLeft() != 0) {
             // steppers are still moving to their zero positions
-            if (lcd_slowdown_counter  % (LCD_SLOWDOWN_RATE / 2) == 0) {
+            if (lcd_data_slowdown_counter  % LCD_DATA_SLOWDOWN_RATE == 0) {
+                // Serial.print(">>>>> ");
+                // Serial.print(millis());
+                // Serial.println(" lcddisp_init_steppers_wait()");
                 lcddisp_init_steppers_wait();
             }
         } else {
@@ -561,7 +577,10 @@ void check_activity() {
             // 2)
             stepper_pan.off();
             stepper_tilt.off();
-            if (lcd_slowdown_counter % (LCD_SLOWDOWN_RATE / 2) == 0) {
+            if (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0) {
+                // Serial.print(">>>>> ");
+                // Serial.print(millis());
+                // Serial.println(" lcddisp_init_steppers()");
                 lcddisp_init_steppers();
             }
         }

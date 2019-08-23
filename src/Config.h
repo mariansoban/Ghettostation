@@ -61,8 +61,9 @@
 // OLED_LCD use 0x3d or 0x3d
 #define I2CADRESS 0x3C
 
-// used for LCD refresh slowdown during tracking, e.g. value 10 means that LCD is refreshed each 10th cycle
-#define LCD_SLOWDOWN_RATE 20
+// used for LCD refresh slowdown during tracking, e.g. value 10 means that data for LCD prepared each 10th cycle
+#define LCD_DATA_SLOWDOWN_RATE 10
+#define LCD_SLOWDOWN_REFRESH_PERIOD_MS 2000
 //#################################### SERVOS ENDPOINTS #############################################################
 // NO NEED TO EDIT THIS
 //. Those are just default values when not configured.

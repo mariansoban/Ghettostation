@@ -98,7 +98,8 @@ float last_avg_loop_time = 0;
 unsigned long last_ltm_gframe_time = 0;
 
 // used for LCD refresh slowdown during tracking
-unsigned long lcd_slowdown_counter = 0;
+unsigned long lcd_data_slowdown_counter = 0;
+unsigned long last_lcd_refresh_ms = 0;
 
 #ifdef ULN2003
 bool steppers_returning_to_zero_started = false;
