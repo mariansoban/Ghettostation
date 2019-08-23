@@ -100,6 +100,8 @@ unsigned long last_ltm_gframe_time = 0;
 // used for LCD refresh slowdown during tracking
 unsigned long lcd_data_slowdown_counter = 0;
 unsigned long last_lcd_refresh_ms = 0;
+bool force_refresh_data_for_lcd = false;
+bool force_refresh_lcd = false;
 
 #ifdef ULN2003
 bool steppers_returning_to_zero_started = false;

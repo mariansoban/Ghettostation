@@ -202,7 +202,12 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
     do {
         unsigned long start_time = millis();
         unsigned long start_time_micros = micros();
-        bool refresh_lcd_flag = false;
+        bool refresh_lcd_flag =  false;
+
+        if (force_refresh_lcd) {
+            refresh_lcd_flag = true;
+            force_refresh_lcd = false;
+        }
 
         get_telemetry();
 
@@ -341,9 +346,13 @@ void check_activity() {
             current_activity = 2;         // set bearing if not set.
         } else if (home_bear) {
             antenna_tracking();
-            if (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0) {
+            if (force_refresh_data_for_lcd || (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0)) {
                 // unsigned long start = micros();
                 // XXX NOTE: call takes about 2ms for LCDLCM1602, 3ms for OLEDLCD!
+                if (force_refresh_data_for_lcd) {
+                    force_refresh_data_for_lcd = false;
+                    force_refresh_lcd = true;
+                }
                 // Serial.print(">>>>> ");
                 // Serial.print(millis());
                 // Serial.println(" lcddisp_tracking()");
@@ -566,7 +575,11 @@ void check_activity() {
 
         if (stepper_pan.getStepsLeft() != 0 && stepper_tilt.getStepsLeft() != 0) {
             // steppers are still moving to their zero positions
-            if (lcd_data_slowdown_counter  % LCD_DATA_SLOWDOWN_RATE == 0) {
+            if (force_refresh_data_for_lcd || (lcd_data_slowdown_counter  % LCD_DATA_SLOWDOWN_RATE == 0)) {
+                if (force_refresh_data_for_lcd) {
+                    force_refresh_data_for_lcd = false;
+                    force_refresh_lcd = true;
+                }
                 // Serial.print(">>>>> ");
                 // Serial.print(millis());
                 // Serial.println(" lcddisp_init_steppers_wait()");
@@ -577,7 +590,11 @@ void check_activity() {
             // 2)
             stepper_pan.off();
             stepper_tilt.off();
-            if (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0) {
+            if (force_refresh_data_for_lcd || (lcd_data_slowdown_counter % LCD_DATA_SLOWDOWN_RATE == 0)) {
+                if (force_refresh_data_for_lcd) {
+                    force_refresh_data_for_lcd = false;
+                    force_refresh_lcd = true;
+                }
                 // Serial.print(">>>>> ");
                 // Serial.print(millis());
                 // Serial.println(" lcddisp_init_steppers()");
@@ -648,6 +665,7 @@ void enterButtonReleaseEvents(Button &btn) {
             } else if ((gps_fix) && (home_pos) && (home_bear)) {
                 // START TRACKING
                 current_activity = 1;
+                force_refresh_data_for_lcd = true;
             }
         }
 
@@ -853,6 +871,7 @@ void init_menu() {
 
 void screen_tracking(MenuItem *p_menu_item) {
     current_activity = 1;
+    force_refresh_data_for_lcd = true;
 }
 
 void screen_sethome(MenuItem *p_menu_item) {
@@ -923,6 +942,7 @@ void configure_voltage_ratio(MenuItem *p_menu_item) {
 
 void init_stepper_positions(MenuItem *p_menu_item) {
     current_activity = 18;
+    force_refresh_data_for_lcd = true;
 }
 
 //######################################## TELEMETRY FUNCTIONS #############################################
