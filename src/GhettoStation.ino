@@ -246,7 +246,7 @@ static void smartDelay(unsigned long ms, bool ignore_lcd) {
             //debug output to usb Serial
 #if defined(DEBUG)
             debug1();
-            // debug2();
+            // debug2(); // will probably not work because
 #endif
         }
 

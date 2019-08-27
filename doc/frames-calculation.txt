@@ -1,0 +1,116 @@
+10sec data
+GFRAME 23x ~ 2.3 Hz 
+AFRAME 55x ~ 5.5 Hz
+SFRAME 22x ~ 2.2 Hz
+
+frame size
+GFRAME 23x 18B = 414B
+AFRAME 55x 10B = 550B
+SFRAME 22x 11B = 242B
+                -----
+                1206B / 10 sec ~ 120B / sec
+                
+badwidth
+2400 bauds ~ 240B / sec
+
+==================================================================================
+### 10103 LTM packet received, type GFRAME
+### 10128 LTM packet received, type AFRAME
+### 10231 LTM packet received, type SFRAME
+### 10329 LTM packet received, type AFRAME
+### 10465 LTM packet received, type GFRAME
+### 10528 LTM packet received, type AFRAME
+### 10663 LTM packet received, type SFRAME
+### 10728 LTM packet received, type AFRAME
+### 10864 LTM packet received, type AFRAME
+### 10961 LTM packet received, type GFRAME
+### 11064 LTM packet received, type AFRAME
+### 11131 LTM packet received, type SFRAME
+### 11264 LTM packet received, type AFRAME
+### 11361 LTM packet received, type GFRAME
+### 11463 LTM packet received, type AFRAME
+### 11532 LTM packet received, type SFRAME
+### 11664 LTM packet received, type AFRAME
+### 11727 LTM packet received, type AFRAME
+### 11864 LTM packet received, type GFRAME
+### 11928 LTM packet received, type AFRAME
+### 12063 LTM packet received, type SFRAME
+### 12128 LTM packet received, type AFRAME
+### 12264 LTM packet received, type GFRAME
+### 12327 LTM packet received, type AFRAME
+### 12464 LTM packet received, type SFRAME
+### 12528 LTM packet received, type AFRAME
+### 12663 LTM packet received, type AFRAME
+### 12761 LTM packet received, type GFRAME
+### 12863 LTM packet received, type AFRAME
+### 12932 LTM packet received, type SFRAME
+### 13064 LTM packet received, type AFRAME
+### 13161 LTM packet received, type GFRAME
+### 13263 LTM packet received, type AFRAME
+### 13333 LTM packet received, type SFRAME
+### 13462 LTM packet received, type AFRAME
+### 13529 LTM packet received, type AFRAME
+### 13664 LTM packet received, type GFRAME
+### 13729 LTM packet received, type AFRAME
+### 13863 LTM packet received, type SFRAME
+### 13930 LTM packet received, type AFRAME
+### 14063 LTM packet received, type GFRAME
+### 14130 LTM packet received, type AFRAME
+### 14264 LTM packet received, type SFRAME
+### 14329 LTM packet received, type AFRAME
+### 14464 LTM packet received, type AFRAME
+### 14563 LTM packet received, type GFRAME
+### 14663 LTM packet received, type AFRAME
+### 14734 LTM packet received, type SFRAME
+### 14864 LTM packet received, type AFRAME
+### 14962 LTM packet received, type GFRAME
+### 15102 LTM packet received, type AFRAME
+### 15133 LTM packet received, type SFRAME
+### 15228 LTM packet received, type AFRAME
+### 15329 LTM packet received, type AFRAME
+### 15465 LTM packet received, type GFRAME
+### 15528 LTM packet received, type AFRAME
+### 15665 LTM packet received, type SFRAME
+### 15728 LTM packet received, type AFRAME
+### 15864 LTM packet received, type GFRAME
+### 15929 LTM packet received, type AFRAME
+### 16063 LTM packet received, type SFRAME
+### 16129 LTM packet received, type AFRAME
+### 16264 LTM packet received, type AFRAME
+### 16362 LTM packet received, type GFRAME
+### 16463 LTM packet received, type AFRAME
+### 16533 LTM packet received, type SFRAME
+### 16663 LTM packet received, type AFRAME
+### 16761 LTM packet received, type GFRAME
+### 16864 LTM packet received, type AFRAME
+### 16932 LTM packet received, type SFRAME
+### 17063 LTM packet received, type AFRAME
+### 17128 LTM packet received, type AFRAME
+### 17263 LTM packet received, type GFRAME
+### 17329 LTM packet received, type AFRAME
+### 17464 LTM packet received, type SFRAME
+### 17527 LTM packet received, type AFRAME
+### 17664 LTM packet received, type GFRAME
+### 17728 LTM packet received, type AFRAME
+### 17863 LTM packet received, type SFRAME
+### 17929 LTM packet received, type AFRAME
+### 18064 LTM packet received, type AFRAME
+### 18161 LTM packet received, type GFRAME
+### 18264 LTM packet received, type AFRAME
+### 18332 LTM packet received, type SFRAME
+### 18463 LTM packet received, type AFRAME
+### 18561 LTM packet received, type GFRAME
+### 18664 LTM packet received, type AFRAME
+### 18732 LTM packet received, type SFRAME
+### 18864 LTM packet received, type AFRAME
+### 18927 LTM packet received, type AFRAME
+### 19063 LTM packet received, type GFRAME
+### 19129 LTM packet received, type AFRAME
+### 19263 LTM packet received, type SFRAME
+### 19329 LTM packet received, type AFRAME
+### 19464 LTM packet received, type GFRAME
+### 19528 LTM packet received, type AFRAME
+### 19663 LTM packet received, type SFRAME
+### 19729 LTM packet received, type AFRAME
+### 19863 LTM packet received, type AFRAME
+### 19961 LTM packet received, type GFRAME

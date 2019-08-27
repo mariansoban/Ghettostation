@@ -97,7 +97,19 @@ void ltm_read() {
                 if(LTMrcvChecksum == 0) {
                     telemetry_ok = true;
                     lastpacketreceived = millis();
-                    protocol = "LTM";
+//                    Serial.print("### ");
+//                    Serial.print( lastpacketreceived);
+//                    Serial.print(" LTM packet received, type ");
+//                    if (LTMcmd == LIGHTTELEMETRY_GFRAME) {
+//                        Serial.println("GFRAME");
+//                    } else if (LTMcmd == LIGHTTELEMETRY_AFRAME) {
+//                        Serial.println("AFRAME");
+//                    } else if (LTMcmd == LIGHTTELEMETRY_SFRAME) {
+//                        Serial.println("SFRAME");
+//                    } else {
+//                        Serial.println("unknown");
+//                    }
+                    // protocol = "LTM";
                     ltm_check();
                     c_state = IDLE;
                 }

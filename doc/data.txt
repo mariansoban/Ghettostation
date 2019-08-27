@@ -1,0 +1,354 @@
+tialised
+### 7244 LTM packet received, type SFRAME
+### 7245 LTM packet received, type AFRAME
+### 7246 LTM packet received, type GFRAME
+### 7250 LTM packet received, type AFRAME
+### 7254 LTM packet received, type SFRAME
+==========debug1================
+memory: 1627    current activity: 0     avg. loop time [ms]: 0.00       avg. lopp [HZ]: 0       longest loop time [ms]: 0       last gframe processed before [ms]: 22   steppers RPM: 15        steppers delay [ms]: 0.98
+==========debug2================
+mem 1627
+activ:0
+conftelem:2
+baud1
+lat=0.0000000
+lon=0.0000000
+alt=0
+rel_alt=0
+00
+dst=0
+El:0
+Be:0
+H Be:0
+uav_fix_type=0
+uav_satellites_visible=0
+pitch:450
+roll:900
+yaw:0
+rbat:0
+amp:0
+rssi:0
+aspeed:0
+armed:0
+fs:0
+fmode:16
+armfsmode64
+### 7429 LTM packet received, type AFRAME
+### 7533 LTM packet received, type SFRAME
+### 7664 LTM packet received, type AFRAME
+### 7762 LTM packet received, type GFRAME
+### 7865 LTM packet received, type AFRAME
+### 7933 LTM packet received, type SFRAME
+### 8064 LTM packet received, type AFRAME
+### 8128 LTM packet received, type AFRAME
+### 8263 LTM packet received, type GFRAME
+### 8329 LTM packet received, type AFRAME
+### 8464 LTM packet received, type SFRAME
+### 8528 LTM packet received, type AFRAME
+### 8664 LTM packet received, type GFRAME
+### 8728 LTM packet received, type AFRAME
+### 8863 LTM packet received, type SFRAME
+### 8929 LTM packet received, type AFRAME
+### 9064 LTM packet received, type AFRAME
+### 9161 LTM packet received, type GFRAME
+### 9264 LTM packet received, type AFRAME
+### 9332 LTM packet received, type SFRAME
+### 9463 LTM packet received, type AFRAME
+### 9562 LTM packet received, type GFRAME
+### 9663 LTM packet received, type AFRAME
+### 9732 LTM packet received, type SFRAME
+### 9864 LTM packet received, type AFRAME
+### 9928 LTM packet received, type AFRAME
+==========debug1================
+memory: 1627    current activity: 0     avg. loop time [ms]: 0.16       avg. lopp [HZ]: 6206.09 longest loop time [ms]: 167     last gframe processed before [ms]: 446  steppers RPM: 15        steppers delay [ms]: 0.98
+==========debug2================
+mem 1627
+activ:0
+conftelem:2
+baud1
+lat=0.0000000
+lon=0.0000000
+alt=0
+rel_alt=0
+00
+dst=0
+El:15
+Be:0
+H Be:0
+uav_fix_type=1
+uav_satellites_visible=0
+pitch:483
+roll:901
+yaw:0
+rbat:0
+amp:0
+rssi:0
+aspeed:0
+armed:0
+fs:0
+fmode:0
+armfsmode0
+### 10103 LTM packet received, type GFRAME
+### 10128 LTM packet received, type AFRAME
+### 10231 LTM packet received, type SFRAME
+### 10329 LTM packet received, type AFRAME
+### 10465 LTM packet received, type GFRAME
+### 10528 LTM packet received, type AFRAME
+### 10663 LTM packet received, type SFRAME
+### 10728 LTM packet received, type AFRAME
+### 10864 LTM packet received, type AFRAME
+### 10961 LTM packet received, type GFRAME
+### 11064 LTM packet received, type AFRAME
+### 11131 LTM packet received, type SFRAME
+### 11264 LTM packet received, type AFRAME
+### 11361 LTM packet received, type GFRAME
+### 11463 LTM packet received, type AFRAME
+### 11532 LTM packet received, type SFRAME
+### 11664 LTM packet received, type AFRAME
+### 11727 LTM packet received, type AFRAME
+### 11864 LTM packet received, type GFRAME
+### 11928 LTM packet received, type AFRAME
+### 12063 LTM packet received, type SFRAME
+### 12128 LTM packet received, type AFRAME
+### 12264 LTM packet received, type GFRAME
+### 12327 LTM packet received, type AFRAME
+### 12464 LTM packet received, type SFRAME
+### 12528 LTM packet received, type AFRAME
+### turning off TILT stepper due to inactivity
+### 12663 LTM packet received, type AFRAME
+### 12761 LTM packet received, type GFRAME
+### 12863 LTM packet received, type AFRAME
+### 12932 LTM packet received, type SFRAME
+### 13064 LTM packet received, type AFRAME
+### 13161 LTM packet received, type GFRAME
+### 13263 LTM packet received, type AFRAME
+### 13333 LTM packet received, type SFRAME
+### 13462 LTM packet received, type AFRAME
+### 13529 LTM packet received, type AFRAME
+### 13664 LTM packet received, type GFRAME
+### 13729 LTM packet received, type AFRAME
+### 13863 LTM packet received, type SFRAME
+### 13930 LTM packet received, type AFRAME
+### 14063 LTM packet received, type GFRAME
+### 14130 LTM packet received, type AFRAME
+### 14264 LTM packet received, type SFRAME
+### 14329 LTM packet received, type AFRAME
+### 14464 LTM packet received, type AFRAME
+### 14563 LTM packet received, type GFRAME
+### 14663 LTM packet received, type AFRAME
+### 14734 LTM packet received, type SFRAME
+### 14864 LTM packet received, type AFRAME
+### 14962 LTM packet received, type GFRAME
+==========debug1================
+memory: 1627    current activity: 0     avg. loop time [ms]: 0.15       avg. lopp [HZ]: 6476.57 longest loop time [ms]: 167     last gframe processed before [ms]: 46   steppers RPM: 15        steppers delay [ms]: 0.98
+==========debug2================
+mem 1627
+activ:0
+conftelem:2
+baud1
+lat=0.0000000
+lon=0.0000000
+alt=0
+rel_alt=0
+00
+dst=0
+El:15
+Be:0
+H Be:0
+uav_fix_type=1
+uav_satellites_visible=0
+pitch:418
+roll:968
+yaw:359
+rbat:0
+amp:0
+rssi:0
+aspeed:0
+armed:0
+fs:0
+fmode:0
+armfsmode0
+### 15102 LTM packet received, type AFRAME
+### 15133 LTM packet received, type SFRAME
+### 15228 LTM packet received, type AFRAME
+### 15329 LTM packet received, type AFRAME
+### 15465 LTM packet received, type GFRAME
+### 15528 LTM packet received, type AFRAME
+### 15665 LTM packet received, type SFRAME
+### 15728 LTM packet received, type AFRAME
+### 15864 LTM packet received, type GFRAME
+### 15929 LTM packet received, type AFRAME
+### 16063 LTM packet received, type SFRAME
+### 16129 LTM packet received, type AFRAME
+### 16264 LTM packet received, type AFRAME
+### 16362 LTM packet received, type GFRAME
+### 16463 LTM packet received, type AFRAME
+### 16533 LTM packet received, type SFRAME
+### 16663 LTM packet received, type AFRAME
+### 16761 LTM packet received, type GFRAME
+### 16864 LTM packet received, type AFRAME
+### 16932 LTM packet received, type SFRAME
+### 17063 LTM packet received, type AFRAME
+### 17128 LTM packet received, type AFRAME
+### 17263 LTM packet received, type GFRAME
+### 17329 LTM packet received, type AFRAME
+### 17464 LTM packet received, type SFRAME
+### 17527 LTM packet received, type AFRAME
+### 17664 LTM packet received, type GFRAME
+### 17728 LTM packet received, type AFRAME
+### 17863 LTM packet received, type SFRAME
+### 17929 LTM packet received, type AFRAME
+### 18064 LTM packet received, type AFRAME
+### 18161 LTM packet received, type GFRAME
+### 18264 LTM packet received, type AFRAME
+### 18332 LTM packet received, type SFRAME
+### 18463 LTM packet received, type AFRAME
+### 18561 LTM packet received, type GFRAME
+### 18664 LTM packet received, type AFRAME
+### 18732 LTM packet received, type SFRAME
+### 18864 LTM packet received, type AFRAME
+### 18927 LTM packet received, type AFRAME
+### 19063 LTM packet received, type GFRAME
+### 19129 LTM packet received, type AFRAME
+### 19263 LTM packet received, type SFRAME
+### 19329 LTM packet received, type AFRAME
+### 19464 LTM packet received, type GFRAME
+### 19528 LTM packet received, type AFRAME
+### 19663 LTM packet received, type SFRAME
+### 19729 LTM packet received, type AFRAME
+### 19863 LTM packet received, type AFRAME
+### 19961 LTM packet received, type GFRAME
+==========debug1================
+memory: 1627    current activity: 0     avg. loop time [ms]: 0.16       avg. lopp [HZ]: 6382.81 longest loop time [ms]: 167     last gframe processed before [ms]: 48   steppers RPM: 15        steppers delay [ms]: 0.98
+==========debug2================
+mem 1627
+activ:0
+conftelem:2
+baud1
+lat=0.0000000
+lon=0.0000000
+alt=0
+rel_alt=0
+00
+dst=0
+El:15
+Be:0
+H Be:0
+uav_fix_type=1
+uav_satellites_visible=0
+pitch:485
+roll:1008
+yaw:359
+rbat:0
+amp:0
+rssi:0
+aspeed:0
+armed:0
+fs:0
+fmode:0
+armfsmode0
+### 20104 LTM packet received, type AFRAME
+### 20132 LTM packet received, type SFRAME
+### 20228 LTM packet received, type AFRAME
+### 20362 LTM packet received, type GFRAME
+### 20464 LTM packet received, type AFRAME
+### 20532 LTM packet received, type SFRAME
+### 20665 LTM packet received, type AFRAME
+### 20727 LTM packet received, type AFRAME
+### 20865 LTM packet received, type GFRAME
+### 20928 LTM packet received, type AFRAME
+### 21063 LTM packet received, type SFRAME
+### 21128 LTM packet received, type AFRAME
+### 21264 LTM packet received, type GFRAME
+### 21327 LTM packet received, type AFRAME
+### 21464 LTM packet received, type SFRAME
+### 21528 LTM packet received, type AFRAME
+### 21663 LTM packet received, type AFRAME
+### 21761 LTM packet received, type GFRAME
+### 21864 LTM packet received, type AFRAME
+### 21932 LTM packet received, type SFRAME
+### 22064 LTM packet received, type AFRAME
+### 22161 LTM packet received, type GFRAME
+### 22263 LTM packet received, type AFRAME
+### 22331 LTM packet received, type SFRAME
+### 22463 LTM packet received, type AFRAME
+### 22526 LTM packet received, type AFRAME
+### 22664 LTM packet received, type GFRAME
+### 22727 LTM packet received, type AFRAME
+### 22863 LTM packet received, type SFRAME
+### 22927 LTM packet received, type AFRAME
+### 23063 LTM packet received, type GFRAME
+### 23127 LTM packet received, type AFRAME
+### 23264 LTM packet received, type SFRAME
+### 23327 LTM packet received, type AFRAME
+### 23463 LTM packet received, type AFRAME
+### 23560 LTM packet received, type GFRAME
+### 23663 LTM packet received, type AFRAME
+### 23731 LTM packet received, type SFRAME
+### 23864 LTM packet received, type AFRAME
+### 23960 LTM packet received, type GFRAME
+### 24064 LTM packet received, type AFRAME
+### 24131 LTM packet received, type SFRAME
+### 24263 LTM packet received, type AFRAME
+### 24327 LTM packet received, type AFRAME
+### 24464 LTM packet received, type GFRAME
+### 24526 LTM packet received, type AFRAME
+### 24664 LTM packet received, type SFRAME
+### 24726 LTM packet received, type AFRAME
+### 24863 LTM packet received, type GFRAME
+### 24927 LTM packet received, type AFRAME
+==========debug1================
+memory: 1627    current activity: 0     avg. loop time [ms]: 0.16       avg. lopp [HZ]: 6381.56 longest loop time [ms]: 167     last gframe processed before [ms]: 146  steppers RPM: 15        steppers delay [ms]: 0.98
+==========debug2================
+mem 1627
+activ:0
+conftelem:2
+baud1
+lat=0.0000000
+lon=0.0000000
+alt=-1
+rel_alt=0
+00
+dst=0
+El:15
+Be:0
+H Be:0
+uav_fix_type=1
+uav_satellites_visible=0
+pitch:555
+roll:717
+yaw:351
+rbat:0
+amp:0
+rssi:0
+aspeed:0
+armed:0
+fs:0
+fmode:0
+armfsmode0
+### 25104 LTM packet received, type SFRAME
+### 25126 LTM packet received, type AFRAME
+### 25226 LTM packet received, type AFRAME
+### 25359 LTM packet received, type GFRAME
+### 25464 LTM packet received, type AFRAME
+### 25530 LTM packet received, type SFRAME
+### 25664 LTM packet received, type AFRAME
+### 25759 LTM packet received, type GFRAME
+### 25865 LTM packet received, type AFRAME
+### 25929 LTM packet received, type SFRAME
+### 26063 LTM packet received, type AFRAME
+### 26126 LTM packet received, type AFRAME
+### 26263 LTM packet received, type GFRAME
+### 26326 LTM packet received, type AFRAME
+### 26464 LTM packet received, type SFRAME
+### 26525 LTM packet received, type AFRAME
+### 26663 LTM packet received, type GFRAME
+### 26725 LTM packet received, type AFRAME
+### 26863 LTM packet received, type SFRAME
+### 26926 LTM packet received, type AFRAME
+### 27064 LTM packet received, type AFRAME
+### 27158 LTM packet received, type GFRAME
+### 27264 LTM packet received, type AFRAME
+### 27329 LTM packet received, type SFRAME
+### 27463 LTM packet received, type AFRAME
+### 27558 LTM packet received, type GFRAME
