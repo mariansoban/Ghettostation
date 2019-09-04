@@ -1375,7 +1375,7 @@ void debug1() {
     Serial.print(current_activity);
     Serial.print("\tavg. loop time [ms]: ");
     Serial.print(last_avg_loop_time);
-    Serial.print("\tavg. lopp [HZ]: ");
+    Serial.print("\tavg. loop [HZ]: ");
     if (last_avg_loop_time > 0) {
         Serial.print(1000 / last_avg_loop_time);
     } else {
