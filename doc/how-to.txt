@@ -5,6 +5,7 @@ BUILD
 platformio run
 
 # upload
+# set platformio_upload_port=COM4
 platformio run -t upload
 
 # create eclipse descriptors
@@ -54,3 +55,10 @@ WIRING FOR APM (ArdupilotMega 2.5)
 	APM A5 (PF5 ~ 59) <---> TILT ULN2003 IN2
 	APM A6 (PF6 ~ 60) <---> TILT ULN2003 IN3
 	APM A7 (PF7 ~ 61) <---> TILT ULN2003 IN4
+	
+=====================================================
+SITL testing
+
+
+Note: Bench testing - use GhettoProxy - convert Mavlink stream from SITL simulation to LTM 
+(e.g. by Arduino Pro Mini, Mavlink IN - RX, LTM OUTt @ 2400 - D9 with #include <AltSoftSerial.h> in GhettoProxy.ino)
